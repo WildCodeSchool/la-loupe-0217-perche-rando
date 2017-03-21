@@ -1,8 +1,13 @@
-![Lineman build](https://travis-ci.org/JbPasquier/mean-lineman.svg?branch=master)
+# Projet Perche Rando
 
-# [MEAN](http://mean.io/) Starter with [Lineman](http://linemanjs.com/)
+## Git Workflow
 
-## Angular
+- We will use [Git Flow](https://datasift.github.io/gitflow/IntroducingGitFlow.html)
+
+## Useful links
+
+- [Board Trello](https://trello.com/b/EsHaRQhw/perche-rando)
+
 
 ### Requirements
 
@@ -14,8 +19,8 @@
 #### Installation
 
 ```bash
-git clone git@github.com:JbPasquier/mean-lineman.git
-cd mean-lineman
+git clone git@github.com:WildCodeSchool/la-loupe-0217-perche-rando.git
+cd la-louee-0217-perche-rando/
 npm install
 ```
 
