@@ -1,3 +1,6 @@
+/*
+* Service utilisé pour traviller sur les utilisateurs
+*/
 angular.module('app')
     .service('UserService', function($http) {
         return {
@@ -11,7 +14,7 @@ angular.module('app')
                 return $http.put('/users/' + id, user);
             },
             delete: function(id) {
-                return $http.put('/users/' + id);
+                return $http.delete('/users/' + id);
             }
         };
     });

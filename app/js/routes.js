@@ -18,7 +18,7 @@ angular.module('app')
                 views: {
                     'content@': {
                         templateUrl: 'anon/home.html',
-                        controller: 'MainController'
+                        controller: 'HomeController'
                     }
                 }
             })
@@ -69,6 +69,24 @@ angular.module('app')
                     'content@': {
                         templateUrl: 'user/profile.html',
                         controller: 'ProfileController'
+                    }
+                }
+            })
+            .state('user.invites', {
+                url: '/invites',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/invites.html',
+                        controller: 'InviteController'
+                    }
+                }
+            })
+            .state('user.trails', { // La liste des circuits
+                url: '/trails',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/trails.html',
+                        controller: 'TrailsController'
                     }
                 }
             });

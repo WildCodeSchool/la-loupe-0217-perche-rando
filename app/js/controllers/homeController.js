@@ -1,4 +1,4 @@
 angular.module('app')
-    .controller('MainController', function($scope) {
+    .controller('InviteController', function($scope) {
       /* Here is your main controller */
     });
