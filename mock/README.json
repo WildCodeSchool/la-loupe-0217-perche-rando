@@ -1,0 +1,8 @@
+# Mock directory
+
+Dossier pour simuler le backend.
+
+Lancer avec :
+```
+json-server --watch db.json
+```
