@@ -89,6 +89,15 @@ angular.module('app')
                         controller: 'TrailsController'
                     }
                 }
+            })
+            .state('user.create-map', { // La liste des circuits
+                url: '/create-map',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/create-map.html',
+                        controller: 'TrailsController'
+                    }
+                }
             });
         $urlRouterProvider.otherwise('/');
     });
