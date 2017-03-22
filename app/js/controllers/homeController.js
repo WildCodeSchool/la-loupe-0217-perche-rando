@@ -1,4 +1,4 @@
 angular.module('app')
-    .controller('homeController', function($scope) {
+    .controller('HomeController', function($scope) {
       /* Here is your main controller */
     });

@@ -39,6 +39,15 @@ angular.module('app')
                         controller: 'RegisterController'
                     }
                 }
+            })
+            .state('anon.display-trail ', { // Un circuit à afficher
+                url: '/trail/:id',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/display-trail.html',
+                        controller: 'TrailController'
+                    }
+                }
             });
         $stateProvider
             .state('user', {
@@ -90,12 +99,21 @@ angular.module('app')
                     }
                 }
             })
-            .state('user.create-map', { // La liste des circuits
+            .state('user.create-map', {
                 url: '/create-map',
                 views: {
                     'content@': {
                         templateUrl: 'user/create-map.html',
                         controller: 'TrailsController'
+                    }
+                }
+            })
+            .state('user.display-trail ', { // Un circuit à afficher
+                url: '/trail/:id',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/display-trail.html',
+                        controller: 'TrailController'
                     }
                 }
             });
