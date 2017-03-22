@@ -9,13 +9,10 @@ angular.module('app')
             'show': false
         };
 
-        $scope.getPath = function() {
-            return $scope.trail.nodes.map( node => [node.lat, node.lng] );
-        };
-
         TrailService.getOne($scope.idTrail).then(function(res) {
             console.log(res);
             $scope.trail = res.data;
+            console.log($scope.trail);
             NgMap.getMap().then(function(map) {
                 console.log(map);
 
@@ -24,7 +21,7 @@ angular.module('app')
             });
         }, function(err) {
             $scope.error.show = true;
-            $scope.error.content = err.statusText3;
+            $scope.error.content = err.statusText;
             console.log(err);
         });
 

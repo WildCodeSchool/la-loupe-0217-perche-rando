@@ -48,6 +48,15 @@ angular.module('app')
                         controller: 'TrailController'
                     }
                 }
+            })
+            .state('anon.create-trail ', { // Un circuit à afficher
+                url: '/create-trail',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/create-trail.html',
+                        controller: 'CreateTrailController'
+                    }
+                }
             });
         $stateProvider
             .state('user', {

@@ -3,14 +3,14 @@
         {{ error.content }}
     </div>
 
+    <div class="">
+        ID : {{ idTrail }}
+    </div>
 
-
-    <div ng-hide="error.show">
-        <div class="">
-            ID : {{ idTrail }}
-        </div>
+    <div>
         <div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
             <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 80%; width: 50%">
+
                 <shape name="polyline" id="foo"
                     path="{{trail.nodes}}"
                     stroke-color="#FF0000"
@@ -21,3 +21,4 @@
         </div>
 
     </div>
+</div>
