@@ -57,6 +57,15 @@ angular.module('app')
                         controller: 'CreateTrailController'
                     }
                 }
+            })
+            .state('anon.list-trail ', { // Un circuit à afficher
+                url: '/list-trail',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/list-trail.html',
+                        controller: 'ListController'
+                    }
+                }
             });
         $stateProvider
             .state('user', {
