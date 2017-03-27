@@ -3,11 +3,21 @@
  */
 angular.module('app')
     .controller('ListController', function($scope, TrailService) {
-$scope.applyFilters = function () {
-  console.log('distance', $scope.filterDistance);
-  console.log('city', $scope.filterCity);
-};
+        $scope.Cities = [];
+        TrailService.getList().then(function(res) {
+            $scope.Cities = res.data;
+            console.log($scope.Cities);
+          });
 
-$scope.Cities = ['La Loupe', 'Margon', 'Courcerault', 'Brunelles', 'Condé-sur-Huisne', 'Saint-Maurice-Saint-Germain'];
+        $scope.applyFilters = function() {
+            console.log('distance', $scope.filterDistance);
+            console.log('city', $scope.filterCity);
+            console.log('stars', $scope.filterRating);
+        };
+
+        TrailService.getList().then(function(res) {
+            console.log(res);
+
+        });
 
     });

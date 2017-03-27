@@ -18,6 +18,9 @@ angular.module('app')
             },
             getAllByUser: function(userId) {
                 // TODO à compléter
+            },
+            getList: function (list) {
+                return $http.get('/trails');
             }
         };
     });
