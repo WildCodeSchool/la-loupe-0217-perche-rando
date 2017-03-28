@@ -9,9 +9,14 @@
   padding: 2px;
   text-align: center;
   margin-left: 2px;
+  box-shadow: 1px 1px 0px #aaa;
 }
 .iconWind {
   width: 25px;
+}
+.meteoDescription:first-letter {
+    text-transform: uppercase;
+}
 }
 .temp {
   font-size: 1.5em;

@@ -37,9 +37,9 @@ angular.module('app')
             $scope.error.content = err.statusText;
             console.log('erreur', err);
         });
-        $scope.changeDate = function(date) {
-          date = date.substring(0,10).split("-").reverse().join("-");
-          return date;
-        };
 
+        $scope.changeDate = function(date) {
+            date = date.substring(0, 10).split("-").reverse().join("-");
+            return date;
+        };
     });
