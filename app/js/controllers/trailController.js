@@ -9,33 +9,29 @@ angular.module('app')
             'show': false
         };
 
-        // TrailService.getOne($scope.idTrail).then(function(res) {
-        //     console.log(res);
-        //     $scope.trail = res.data;
-        //     console.log($scope.trail);
-        //     NgMap.getMap().then(function(map) {
-        //         console.log(map);
-        //
-        //         map.setCenter($scope.trail.center);
-        //         map.setZoom($scope.trail.zoom);
-        //     });
-        //
-        // }, function(err) {
-        //     $scope.error.show = true;
-        //     $scope.error.content = err.statusText;
-        //     console.log(err);
-        // });
+        TrailService.getOne($scope.idTrail).then(function(res) {
+            console.log('res1', res);
+            $scope.trail = res.data;
+            console.log($scope.trail);
+            NgMap.getMap().then(function(map) {
+                console.log(map);
 
-        $scope.Ville = 'Chartres';
-        WeatherService.getWeather($scope.Ville).then(function(res) {
-            console.log(res);
-            $scope.weather = res.data.list;
-            console.log($scope.weather);
+                map.setCenter($scope.trail.center);
+                map.setZoom($scope.trail.zoom);
+            });
+
+            $scope.Ville = res.data.commune;
+            WeatherService.getWeather($scope.Ville).then(function(res) {
+                console.log('res2', res);
+                console.log('ville', $scope.Ville);
+                $scope.weather = res.data.list;
+                console.log($scope.weather);
+            });
 
         }, function(err) {
             $scope.error.show = true;
             $scope.error.content = err.statusText;
-            console.log('erreur', err);
+            console.log(err);
         });
 
         $scope.changeDate = function(date) {
