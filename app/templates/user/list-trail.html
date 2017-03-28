@@ -10,7 +10,7 @@
 <option value="[41]">Plus de 41 km</option>
 </select>
 
-<select ng-options="City.id as City.commune for City in Cities" ng-model="filterCity" name="Commune" class="form-control" >
+<select ng-options="City.id as City.commune for City in Cities | orderBy:'commune'" ng-model="filterCity" name="Commune" class="form-control" >
 <option disabled selected value="">Commune</option>
 </select>
 
@@ -27,5 +27,6 @@
 </form>
 
 <div ng-repeat='list in filters' class="">
+
 
 </div>
