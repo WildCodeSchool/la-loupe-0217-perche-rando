@@ -1,1 +1,19 @@
-/*buttons dropdowns*/
+/*météo*/
+.weather {
+  float: left;
+  font-size: 0.8em;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 0.1em;
+  border-color: #BDBDBD;
+  padding: 2px;
+  text-align: center;
+  margin-left: 2px;
+}
+.iconWind {
+  width: 25px;
+}
+.temp {
+  font-size: 1.5em;
+  text-align: center;
+}
