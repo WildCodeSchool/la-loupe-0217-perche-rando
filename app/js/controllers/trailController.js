@@ -2,7 +2,7 @@
  * Correspond à l'affichage d'un circuit
  */
 angular.module('app')
-    .controller('TrailController', function($scope, $stateParams, TrailService, NgMap, WeatherService) {
+    .controller('TrailController', function($scope, $stateParams, TrailService, NgMap, WeatherService, CommentService) {
         $scope.idTrail = $stateParams.id;
         $scope.error = {
             'content': '',
@@ -37,5 +37,13 @@ angular.module('app')
         $scope.changeDate = function(date) {
             date = date.substring(0, 10).split("-").reverse().join("-");
             return date;
+        };
+        $scope.addComment = function () {
+          console.log('coucou');
+          CommentService.create($scope.newComment).then(function(res) {
+
+          }, function(err){
+
+          });
         };
     });
