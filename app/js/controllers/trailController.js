@@ -10,20 +10,18 @@ angular.module('app')
         };
 
         TrailService.getOne($scope.idTrail).then(function(res) {
-            console.log('res1', res);
             $scope.trail = res.data;
-            console.log($scope.trail);
+            console.log(res.data);
             NgMap.getMap().then(function(map) {
-                console.log(map);
-
-                map.setCenter($scope.trail.center);
+                map.setCenter(toGmapsCenter($scope.trail.center));
                 map.setZoom($scope.trail.zoom);
             });
             $scope.Ville = res.data.commune;
-            WeatherService.getWeather($scope.Ville).then(function(res) {
-                console.log('res2', res);
-                $scope.Weather = res.data.list;
-                console.log('weather2', $scope.Weather);
+            WeatherService.getWeather($scope.Ville.name).then(function(res) {
+                console.log('Weather', res);
+                $scope.weather = res.data.list;
+            }, function(err) {
+                console.log('OpenWeatherMapError', err);
             });
 
         }, function(err) {
@@ -35,12 +33,20 @@ angular.module('app')
             date = date.substring(0, 10).split("-").reverse().join("-");
             return date;
         };
-        $scope.addComment = function () {
-          console.log('coucou');
-          CommentService.create($scope.newComment).then(function(res) {
+        $scope.addComment = function() {
+            console.log('coucou');
+            CommentService.create($scope.newComment).then(function(res) {
+            }, function(err) {
 
-          }, function(err){
-
-          });
+            });
+        };
+        function toGmapsCenter(geoJSONPoint) {
+            return {
+                "lat": geoJSONPoint.coordinates[1],
+                "lng": geoJSONPoint.coordinates[0]
+            };
+        }
+        $scope.toGmapsCoordinates = function(geoJSONLineString) {
+            return geoJSONLineString.coordinates.map(point => [point[1], point[0]]);
         };
     });
