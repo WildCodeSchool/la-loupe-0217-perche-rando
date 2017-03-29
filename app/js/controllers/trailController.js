@@ -19,13 +19,11 @@ angular.module('app')
                 map.setCenter($scope.trail.center);
                 map.setZoom($scope.trail.zoom);
             });
-
             $scope.Ville = res.data.commune;
             WeatherService.getWeather($scope.Ville).then(function(res) {
                 console.log('res2', res);
-                console.log('ville', $scope.Ville);
-                $scope.weather = res.data.list;
-                console.log($scope.weather);
+                $scope.Weather = res.data.list;
+                console.log('weather2', $scope.Weather);
             });
 
         }, function(err) {
@@ -33,9 +31,9 @@ angular.module('app')
             $scope.error.content = err.statusText;
             console.log(err);
         });
-
         $scope.changeDate = function(date) {
             date = date.substring(0, 10).split("-").reverse().join("-");
             return date;
         };
+
     });
