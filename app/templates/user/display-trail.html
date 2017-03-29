@@ -17,19 +17,19 @@
 
     </div>
     <h3>La météo à cinq jours</h3>
-        <h5>à {{Ville}}</h5>
-        <div ng-repeat='meteo in Weather' ng-if="$index % 8 == 0" class='weather'>
-            <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
-            <p class="temp">{{meteo.main.temp}}°C</p>
-            <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
-            <p class="meteoDescription">{{meteo.weather[0].description}}</p>
-            <p class="wind"> <img class="iconWind" src="/wind.png" alt=""> {{meteo.wind.speed}} km/h</p>
-        </div>
+    <h5>à {{Ville}}</h5>
+    <div ng-repeat='meteo in Weather' ng-if="$index % 8 == 0" class='weather'>
+        <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
+        <p class="temp">{{meteo.main.temp}}°C</p>
+        <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
+        <p class="meteoDescription">{{meteo.weather[0].description}}</p>
+        <p class="wind"> <img class="iconWind" src="/wind.png" alt=""> {{meteo.wind.speed}} km/h</p>
+    </div>
 
-        <form class="col-xs-4">
-            <textarea class="form-control" rows="3"  ng-model="newComment"></textarea>
-            <button type="submit" ng-click="createComment()" class="btn btn-default btn-xs">Extra small button</button>
-        </form>
+    <form class="col-xs-4">
+        <textarea class="form-control" rows="3" ng-model="newComment"></textarea>
+        <button type="submit" ng-click="createComment()" class="btn btn-default btn-xs">Extra small button</button>
+    </form>
 
 
 
