@@ -4,8 +4,11 @@
 angular.module('app')
     .service('CommentService', function($http) {
         return {
-            create: function(comment) {
-                return $http.post('http://localhost:3000/comments', comment);
-            }
+          create: function(comment) {
+              return $http.post('/comments/', comment);
+          },
+          getAllByTrailId: function(idTrail) {
+              return $http.get('/comments/byTrail/' + idTrail);
+          }
         };
     });
