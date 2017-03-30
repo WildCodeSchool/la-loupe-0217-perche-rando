@@ -69,6 +69,7 @@ angular.module('app')
         }
 
         $scope.toGmapsCoordinates = function(geoJSONLineString) {
+            console.log('geoJSONLineString', geoJSONLineString);
             return geoJSONLineString.coordinates.map(point => [point[1], point[0]]);
         };
     });
