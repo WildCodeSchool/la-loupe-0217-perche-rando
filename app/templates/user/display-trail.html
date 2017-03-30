@@ -16,24 +16,27 @@
         </div>
 
     </div>
+</div>
+<div>
     <h3>La météo à cinq jours</h3>
     <h5>à {{Ville.name}}</h5>
-    <div ng-repeat='meteo in weather' ng-if="$index % 8 == 0" class='weather'>
-        <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
-        <p class="temp">{{meteo.main.temp}}°C</p>
-        <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
-        <p class="meteoDescription">{{meteo.weather[0].description}}</p>
-        <p class="wind"> <img class="iconWind" src="/wind.png" alt=""> {{meteo.wind.speed}} km/h</p>
-    </div>
+</div>
+<div ng-repeat='meteo in weather' ng-if="$index % 8 == 0" class='weather'>
+    <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
+    <p class="temp">{{meteo.main.temp}}°C</p>
+    <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
+    <p class="meteoDescription">{{meteo.weather[0].description}}</p>
+    <p class="wind"> <img class="iconWind" src="/wind.png" alt=""> {{meteo.wind.speed}} km/h</p>
+</div>
 
+<div class="" ng-repeat="comment in commentsList | orderBy: '-_id'">
+    <p>De {{comment.author._id}}</p>
+    <p>le {{comment.date | date : 'medium'}}</p>
+    <p>{{comment.content}}</p>
 </div>
 <div class="">
     <form class="col-xs-4" ng-submit="addComment()">
         <textarea class="form-control" rows="3" ng-model="newComment.content"></textarea>
-        <button type="submit" class="btn btn-default btn-xs">Envoyer</button>
+        <button type="submit" class="btn btn-default btn-xs" >Envoyer</button>
     </form>
-
-</div>
-<div class="">
-
 </div>

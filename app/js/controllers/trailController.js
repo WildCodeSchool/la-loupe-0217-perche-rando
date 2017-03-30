@@ -38,7 +38,6 @@ angular.module('app')
         };
 
         $scope.addComment = function() {
-            console.log('coucou');
             console.log('newcomment', $scope.newComment);
             $scope.newComment.trail = $scope.idTrail;
             $scope.newComment.author = CurrentUser.user()._id;
@@ -47,10 +46,20 @@ angular.module('app')
             CommentService.create($scope.newComment).then(function(res) {
                 console.log('res comment', res);
                 $scope.newComment.content = '';
+                loadComments();
             }, function(err) {
-                console.log('comment err', err);
+                console.log('err new comment', err);
             });
         };
+
+        function loadComments() {
+            CommentService.getAllByTrailId($scope.idTrail).then(function(res) {
+                console.log('listcomments', res);
+                $scope.commentsList = res.data;
+                console.log('res.data', res.data);
+            });
+        }
+        loadComments();
 
         function toGmapsCenter(geoJSONPoint) {
             return {
