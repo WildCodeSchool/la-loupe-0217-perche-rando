@@ -28,10 +28,13 @@ export default class Comment {
 
     create(req, res) {
         let comment = req.body;
+        console.log('req.body', req.body);
         comment.date = new Date().toISOString();
         model.create(comment, (err, comment) => {
                 if (err) {
-                    res.status(500);
+                    res.status(500).send({
+                      error: err
+                    });
                 } else {
                     res.json({
                         success: true,
