@@ -1,8 +1,10 @@
 import geojson from 'mongoose-geojson-schema';
 import mongoose from 'mongoose';
-import commune from './commune.js';
-import operationOnTrails from './lib/operation-on-trails.js';
-import imageDownloader from '../lib/image-downloader.js';
+import Commune from './commune.js';
+import operationOnTrails from '../lib/operation-on-trails.js';
+import imageDownloader from '../lib/download-image.js';
+
+let commune = new Commune();
 
 const trailSchema = new mongoose.Schema({
     zoom: {
@@ -66,22 +68,34 @@ export default class Trail {
     // TODO create actual function
     // TODO include the bits about downloading the image, finding the center and converting to geojson (if needed)
     create(req, res) {
-        let trail  = req.body;
-
+        let trail = req.body;
+        console.log(trail);
+        console.log('');
         // trail.previewUrl = 'img/default.png';
         // imageDownloader(trail, '../public/');
         trail = operationOnTrails.process(trail);
+        console.log(trail);
+        console.log('');
 
-        model.create(trail,
-            (err, trail) => {
-                if(err) {
-                    res.status(500).send({ err });
-                } else {
-                    res.json({
-                        success: true,
-                        created: trail
+        //  TODO add way to create a new city
+
+        commune.findByName(trail.commune)
+            .exec((err, commune) => {
+                trail.commune = commune._id;
+                model.create(trail,
+                    (err, trail) => {
+                        if (err) {
+                            console.error(err);
+                            res.status(500).send({
+                                err
+                            });
+                        } else {
+                            res.json({
+                                success: true,
+                                created: trail
+                            });
+                        }
                     });
-                }
             });
     }
 }

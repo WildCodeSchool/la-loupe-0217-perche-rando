@@ -34,6 +34,10 @@ export default class Commune {
             });
     }
 
+    findByName(name) {
+        return model.findOne({name});
+    }
+
     // TODO create actual function
     create(req, res) {
         model.create(req.body,
