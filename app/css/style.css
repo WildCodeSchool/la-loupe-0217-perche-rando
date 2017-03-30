@@ -1,3 +1,7 @@
+/*Home*/
+.jumbotron {
+  background-image:url('https://scontent-fra3-1.xx.fbcdn.net/v/t31.0-8/17620563_1572096446163926_4481145124458534288_o.jpg?oh=adedc027ae4ded96231e4ee114e3b61d&oe=5964A38D');
+}
 /*météo*/
 .weather {
   float: left;
