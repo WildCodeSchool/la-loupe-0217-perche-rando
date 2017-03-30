@@ -10,6 +10,8 @@
     "createAdmin": "babel-node ./api/userCreation.js"
   },
   "dependencies": {
+    "@mapbox/polyline": "^0.2.0",
+    "@turf/turf": "^3.14.3",
     "bcrypt": "",
     "body-parser": "",
     "cors": "",

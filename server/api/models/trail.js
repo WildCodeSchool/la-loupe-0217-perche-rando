@@ -1,6 +1,8 @@
 import geojson from 'mongoose-geojson-schema';
 import mongoose from 'mongoose';
 import commune from './commune.js';
+import operationOnTrails from './lib/operation-on-trails.js';
+import imageDownloader from '../lib/image-downloader.js';
 
 const trailSchema = new mongoose.Schema({
     zoom: {
@@ -27,6 +29,9 @@ const trailSchema = new mongoose.Schema({
     nodes: {
         type: mongoose.Schema.Types.LineString,
         required: true
+    },
+    previewUrl: {
+        type: String
     }
 });
 
@@ -61,9 +66,22 @@ export default class Trail {
     // TODO create actual function
     // TODO include the bits about downloading the image, finding the center and converting to geojson (if needed)
     create(req, res) {
-        model.create(req.body,
+        let trail  = req.body;
+
+        // trail.previewUrl = 'img/default.png';
+        // imageDownloader(trail, '../public/');
+        trail = operationOnTrails.process(trail);
+
+        model.create(trail,
             (err, trail) => {
-                res.status(500);
+                if(err) {
+                    res.status(500).send({ err });
+                } else {
+                    res.json({
+                        success: true,
+                        created: trail
+                    });
+                }
             });
     }
 }
