@@ -19,6 +19,7 @@
     "jsonwebtoken": "",
     "method-override": "",
     "mongoose": "",
+    "mongoose-findorcreate": "^1.0.1",
     "mongoose-geojson-schema": "^2.1.2",
     "morgan": ""
   },

@@ -1,12 +1,14 @@
 import geojson from 'mongoose-geojson-schema';
 import mongoose from 'mongoose';
+import findOrCreate from 'mongoose-findorcreate';
 
-const communeSchema = new mongoose.Schema({
+let communeSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
     }
 });
+communeSchema.plugin(findOrCreate);
 
 let model = mongoose.model('Commune', communeSchema);
 
@@ -34,8 +36,11 @@ export default class Commune {
             });
     }
 
-    findByName(name) {
-        return model.findOne({name});
+    // TODO make it so that the search is case insensitive
+    findOrCreateByName(name, callback) {
+        model.findOrCreate({
+            name
+        }, callback);
     }
 
     // TODO create actual function

@@ -7,7 +7,14 @@ function addCenterOfMass(trail) {
 }
 
 function addDistance(trail) {
-    trail.distance = turf.lineDistance(trail.nodes, 'kilometers');
+    let lineFeature = {
+      "type": "Feature",
+      "properties": {},
+      "geometry": trail.nodes
+    };
+
+    console.log('distance', turf.lineDistance(lineFeature, 'kilometers'));
+    trail.distance = turf.lineDistance(lineFeature, 'kilometers');
     return trail;
 }
 

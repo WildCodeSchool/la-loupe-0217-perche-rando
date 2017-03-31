@@ -65,22 +65,18 @@ export default class Trail {
             });
     }
 
-    // TODO create actual function
-    // TODO include the bits about downloading the image, finding the center and converting to geojson (if needed)
+    // TODO include the bits about downloading the image
     create(req, res) {
         let trail = req.body;
         console.log(trail);
         console.log('');
         // trail.previewUrl = 'img/default.png';
-        // imageDownloader(trail, '../public/');
         trail = operationOnTrails.process(trail);
         console.log(trail);
         console.log('');
 
-        //  TODO add way to create a new city
-
-        commune.findByName(trail.commune)
-            .exec((err, commune) => {
+        commune.findOrCreateByName(trail.commune,
+            (err, commune) => {
                 trail.commune = commune._id;
                 model.create(trail,
                     (err, trail) => {
@@ -90,6 +86,7 @@ export default class Trail {
                                 err
                             });
                         } else {
+                            imageDownloader(trail, __dirname + '/../public/img');
                             res.json({
                                 success: true,
                                 created: trail
