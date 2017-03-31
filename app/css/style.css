@@ -5,7 +5,7 @@
 
 @font-face {
     font-family: 'Salsa-Regular';
-    src: url('../fonts/Salasa-Regular.ttf');
+    src: url('../fonts/Salsa-Regular.ttf');
 }
 
 
@@ -51,18 +51,25 @@
 .weather {
     float: left;
     font-size: 0.8em;
-    border-style: solid;
+    border: solid;
     border-radius: 6px;
     border-width: 0.1em;
-    border-color: #BDBDBD;
+    border-color: #6B6E11;
     padding: 2px;
     text-align: center;
     margin-left: 2px;
-    box-shadow: 1px 1px 0px #aaa;
+    /*box-shadow: 0.1em 0.1em 0px #aaae18;*/
+    font-family: 'Salsa-Regular';
+    color: white;
+    margin-right: 6px;
+    width: 18%;
+    background-color: rgba(170, 174, 24, 0.5);
+    position: relative;
 }
 
 .iconWind {
-    width: 25px;
+    width: 20%;
+    margin-top: -10%;
 }
 
 .meteoDescription:first-letter {
@@ -76,6 +83,46 @@
 
 
 /*Pages*/
+
+.blocMap {
+    /*border-style: solid;
+  border-width: 0.1em;
+  border-radius: 10px;
+  border-color: #f6a327;*/
+    margin-top: 20px;
+    margin-right: 10%;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.blocColRight {
+    border-top: solid;
+    border-width: 0.2em;
+    border-radius: 0px;
+    border-color: #f6a327;
+    margin-top: 20px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.titleColPages {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 10px;
+}
+
+.titleColright {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
+.subHeaderColright {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 2px;
+}
 
 .fond {
     background-image: url("../img/couv3.jpg");
@@ -93,20 +140,45 @@
     color: #f6a327;
 }
 
-.coldroite {
-    background-color: rgba(246, 163, 39, 0.5);
-    padding: 10px;
-    margin-top: 2.3em;
-}
 .map {
-  margin-top: 1.1em;
+    margin-top: 1.1em;
 }
+
 .imgTrailHome {
     width: 100%;
 }
-.weather {
-  background-color: #38b8c8;
+
+
+/*Comments*/
+
+.commenttext {
+    width: 100%;
+    background-color: #38b8c8;
+    border: solid;
+    border-color: #106a75;
+    border-width: 1px;
+}
+
+.commentDate {
+    font-family: 'Salsa-Regular';
+    font-size: 1em;
+    margin-top: -3%;
+    color: #f6a327;
+}
+.coomentContent {
+  font-size: 1em;
   border: solid;
-  border-color: #106a75;
-  border-width: 1px
+  border-radius: 6px;
+  border-width: 0.1em;
+  border-color: #6B6E11;
+  padding: 2%;
+  /*text-align: center;*/
+  margin-left: 2px;
+  /*box-shadow: 0.1em 0.1em 0px #aaae18;*/
+  font-family: 'Salsa-Regular';
+  color: white;
+  margin-right: 6px;
+  width: 100%;
+  background-color: rgba(170, 174, 24, 0.5);
+  position: relative;
 }
