@@ -15,6 +15,12 @@
                 </drawing-manager>
             </ng-map>
         </div>
-        <button type="submit" ng-click="createTrail()">Créer Circuit</button>
+
+        <div>
+            <form ng-submit="createTrail()">
+                <input required ng-model="commune" placeholder="Commune de départ"/>
+                <button ng-disabled="!(trail.nodes.length > 0)" type="submit" >Créer Circuit</button>
+            </form>
+        </div>
     </div>
 </div>
