@@ -16,5 +16,10 @@
 
     <script type="text/javascript" src="<%= js %>"></script>
 </body>
+<hr>
+
+<footer>
+    <p>&copy; 2017 Wild Code School, Martin Allard - Thierry Même - Valentin Rigaud.</p>
+</footer>
 
 </html>

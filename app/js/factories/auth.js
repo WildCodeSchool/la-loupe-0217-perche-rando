@@ -54,7 +54,10 @@ angular.module('app')
                     token = LocalService.get('auth_token');
                 }
                 if (token) {
-                    config.headers.authorization = token;
+                    var regex = /api.openweathermap.org/i;
+                    if (!regex.test(config.url)) {
+                        config.headers.authorization = token;
+                    }
                 }
                 return config;
             },
