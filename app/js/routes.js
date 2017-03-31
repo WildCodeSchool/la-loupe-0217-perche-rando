@@ -39,34 +39,10 @@ angular.module('app')
                         controller: 'RegisterController'
                     }
                 }
-            })
-            .state('anon.display-trail ', { // Un circuit à afficher
-                url: '/trail/:id',
-                views: {
-                    'content@': {
-                        templateUrl: 'user/display-trail.html',
-                        controller: 'TrailController'
-                    }
-                }
-            })
-            .state('anon.create-trail ', { // Un circuit à afficher
-                url: '/create-trail',
-                views: {
-                    'content@': {
-                        templateUrl: 'user/create-trail.html',
-                        controller: 'CreateTrailController'
-                    }
-                }
-            })
-            .state('anon.list-trail ', { // Un circuit à afficher
-                url: '/list-trail',
-                views: {
-                    'content@': {
-                        templateUrl: 'user/list-trail.html',
-                        controller: 'ListController'
-                    }
-                }
             });
+            
+
+
         $stateProvider
             .state('user', {
                 abstract: true,
@@ -117,12 +93,21 @@ angular.module('app')
                     }
                 }
             })
-            .state('user.create-map', {
-                url: '/create-map',
+            .state('user.list-trail ', { // Un circuit à afficher
+                url: '/list-trail',
                 views: {
                     'content@': {
-                        templateUrl: 'user/create-map.html',
-                        controller: 'TrailsController'
+                        templateUrl: 'user/list-trail.html',
+                        controller: 'ListController'
+                    }
+                }
+            })
+            .state('anon.create-trail ', { // Un circuit à afficher
+                url: '/create-trail',
+                views: {
+                    'content@': {
+                        templateUrl: 'user/create-trail.html',
+                        controller: 'CreateTrailController'
                     }
                 }
             })
