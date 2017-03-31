@@ -9,9 +9,10 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - 5 km</h2>
+                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km</h2>
                 </div>
                 <div>
+                    <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->
                     <div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
                         <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 25em; width: 98%">
                             <shape name="polyline" id="foo" path="{{toGmapsCoordinates(trail.nodes)}}" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="3">
@@ -46,14 +47,14 @@
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
                     <p class="subHeaderColright">De {{comment.author._id}}</p>
                     <p class="commentDate">le {{comment.date | date : 'medium'}}</p>
-                    <p class="coomentContent">{{comment.content}}</p>
+                    <p class="commentContent">{{comment.content}}</p>
                 </div>
 
                 <div class="">
                     <p class="subHeaderColright">Ajouter un commentaire</p>
                     <form class="" ng-submit="addComment()">
                         <textarea class="form-control " rows="3" ng-model="newComment.content"></textarea>
-                        <button type="submit" class="postComment btn btn-default btn-xs">Envoyer</button>
+                        <button type="submit" class="postComment btn  btn-xs">Envoyer</button>
                     </form>
                 </div>
             </div>

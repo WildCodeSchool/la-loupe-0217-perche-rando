@@ -8,7 +8,6 @@
     src: url('../fonts/Salsa-Regular.ttf');
 }
 
-
 /*Home*/
 
 .couv {
@@ -44,7 +43,6 @@
     background-color: #aaae18;
     border-color: #f6a327;
 }
-
 
 /*météo*/
 
@@ -162,7 +160,7 @@
     margin-top: -3%;
     color: #f6a327;
 }
-.coomentContent {
+.commentContent {
   font-size: 1em;
   border: solid;
   border-radius: 6px;
@@ -180,6 +178,14 @@
 
 .postComment {
 margin-top: 2%;
+}
+.postComment {
+  padding: 6px;
+    background-color: #aaae18;
+    border-color: #aaae18;
+    font-family: 'Salsa-Regular';
+    font-size: 1em;
+    color: #f6a327;
 }
 
 /* TODO à améliorer */
