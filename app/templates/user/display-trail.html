@@ -12,6 +12,7 @@
                     <h2 class='titleColPages'>{{Ville.name}} - 5 km</h2>
                 </div>
                 <div>
+                    <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->
                     <div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
                         <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 25em; width: 98%">
                             <shape name="polyline" id="foo" path="{{toGmapsCoordinates(trail.nodes)}}" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="3">
