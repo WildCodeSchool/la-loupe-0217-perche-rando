@@ -21,7 +21,10 @@ angular.module('app')
             $scope.Ville = res.data.commune;
             WeatherService.getWeather($scope.Ville.name).then(function(res) {
                 console.log('Weather', res);
-                $scope.weather = res.data.list;
+                $scope.weather = res.data.list.filter(function (weather) {
+                  return weather.dt_txt.substring(11) === '12:00:00';
+                });
+                console.log('weather filter', $scope.weather);
             }, function(err) {
                 console.log('OpenWeatherMapError', err);
             });

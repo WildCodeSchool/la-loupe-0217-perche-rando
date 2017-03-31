@@ -40,7 +40,7 @@ angular.module('app')
                     }
                 }
             });
-            
+
 
 
         $stateProvider
@@ -102,7 +102,7 @@ angular.module('app')
                     }
                 }
             })
-            .state('anon.create-trail ', { // Un circuit à afficher
+            .state('user.create-trail ', { // Un circuit à afficher
                 url: '/create-trail',
                 views: {
                     'content@': {

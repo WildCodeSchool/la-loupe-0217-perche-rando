@@ -32,7 +32,7 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                        <div ng-repeat='meteo in weather' ng-if="$index % 8 == 0" class='weather'>
+                        <div ng-repeat='meteo in weather' class='weather'>
                             <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
                             <p class="temp">{{meteo.main.temp}}°C</p>
                             <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
