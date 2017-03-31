@@ -13,9 +13,13 @@ app.server = http.createServer(app);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
+    'limit': '5mb'
+}));
+app.use(bodyParser.urlencoded({
     'extended': 'true'
 }));
 app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'5mb'}));
 app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 }));

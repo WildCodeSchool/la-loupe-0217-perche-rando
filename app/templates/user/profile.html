@@ -1,10 +1,38 @@
 <div class="container-fluid fond">
-    <div class="container">
+    <div class="row">
+        <div class="col-md-7">
 
-        <span class="subHeaderProfile">Profil de</span>
-        <h1 class="titleColPages">{{user.firstname}} {{user.lastname}}</h1>
 
-        <p class="subHeaderProfile">Prénom<input class="inputProfile" type="text" placeholder={{user.firstname}}></p>
 
-  </div>
+        </div>
+        <div class="col-md-5 coldroite">
+            <div class="blocColRight">
+
+                <h1 class="titleColright">{{user.firstname}} {{user.lastname}}</h1>
+                <img class="imgGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon">
+
+                <form class="form" name="loginForm" ng-submit="updateProfile()">
+                    <div ng-repeat="error in errors">{{error.error}}</div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Firstname</label>
+                        <input id="firstname" type="text" class="form-control" ng-model="newuser.firstname" required placeholder="Firstname">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Lastname</label>
+                        <input id="lastname" type="text" class="form-control" ng-model="newuser.lastname" required placeholder="">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Email</label>
+                        <input id="email" type="email" class="form-control" ng-model="newuser.email" required placeholder="">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Password</label>
+                        <input id="password" type="password" class="form-control" ng-model="newuser.password" required placeholder="">
+                    </div>
+                    <button type="submit" class="postComment btn  btn-xs">Mettre à jour</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
 </div>
