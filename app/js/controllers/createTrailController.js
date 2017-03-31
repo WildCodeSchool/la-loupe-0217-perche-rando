@@ -10,7 +10,7 @@ angular.module('app')
         $scope.commune = "";
 
         $scope.trail = {
-            zoom: 14 // TODO rendre le zoom dynamique ?
+            zoom: 13 // TODO rendre le zoom dynamique ?
         };
 
         // TODO if this is not the first path to have ben drawn, delete the previous ones
