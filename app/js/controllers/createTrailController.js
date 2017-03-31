@@ -13,6 +13,8 @@ angular.module('app')
             zoom: 13 // TODO rendre le zoom dynamique ?
         };
 
+        $scope.trailCreated = {};
+
         // TODO if this is not the first path to have ben drawn, delete the previous ones
         $scope.setPath = function(event) {
             var latLngs = event.latLngs.b[0].b;
@@ -28,6 +30,7 @@ angular.module('app')
             // TODO check that the trail has been created
             TrailService.create($scope.trail).then(function(res) {
                 console.log("Trail créée", res);
+                $scope.trailCreated = res.data.created;
             }, function(err) {
                 $scope.error.show = true;
                 $scope.error.content = err.statusText;
