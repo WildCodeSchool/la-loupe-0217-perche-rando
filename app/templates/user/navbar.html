@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation" ng-controller="NavbarController">
+<nav class="navbar navbar-inverse" role="navigation" ng-controller="NavbarController">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="user.dashboard" ng-show="auth.isAuthenticated()">Dashboard</a></li>
+                <li id="titleNavbar" ui-sref-active="active"><a ui-sref="user.dashboard" ng-show="auth.isAuthenticated()">Perche Rando</a></li>
                 <li ui-sref-active="active"><a ui-sref="user.profile" ng-show="auth.isAuthenticated()">Profile</a></li>
 
             </ul>
