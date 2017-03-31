@@ -19,10 +19,5 @@ angular.module('app')
             $scope.filters = [];
             console.log(id);
             $scope.filter.push($scope.cities);
-
         };
-
-
-
-
     });
