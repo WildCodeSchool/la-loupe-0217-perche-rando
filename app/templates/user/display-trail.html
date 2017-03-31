@@ -47,14 +47,14 @@
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
                     <p class="subHeaderColright">De {{comment.author._id}}</p>
                     <p class="commentDate">le {{comment.date | date : 'medium'}}</p>
-                    <p class="coomentContent">{{comment.content}}</p>
+                    <p class="commentContent">{{comment.content}}</p>
                 </div>
 
                 <div class="">
                     <p class="subHeaderColright">Ajouter un commentaire</p>
                     <form class="" ng-submit="addComment()">
                         <textarea class="form-control " rows="3" ng-model="newComment.content"></textarea>
-                        <button type="submit" class="postComment btn btn-default btn-xs">Envoyer</button>
+                        <button type="submit" class="postComment btn  btn-xs">Envoyer</button>
                     </form>
                 </div>
             </div>
