@@ -1,6 +1,10 @@
 import geojson from 'mongoose-geojson-schema';
 import mongoose from 'mongoose';
-import commune from './commune.js';
+import Commune from './commune.js';
+import operationOnTrails from '../lib/operation-on-trails.js';
+import imageDownloader from '../lib/download-image.js';
+
+let commune = new Commune();
 
 const trailSchema = new mongoose.Schema({
     zoom: {
@@ -27,6 +31,9 @@ const trailSchema = new mongoose.Schema({
     nodes: {
         type: mongoose.Schema.Types.LineString,
         required: true
+    },
+    previewUrl: {
+        type: String
     }
 });
 
@@ -58,12 +65,34 @@ export default class Trail {
             });
     }
 
-    // TODO create actual function
-    // TODO include the bits about downloading the image, finding the center and converting to geojson (if needed)
+    // TODO include the bits about downloading the image
     create(req, res) {
-        model.create(req.body,
-            (err, trail) => {
-                res.status(500);
+        let trail = req.body;
+        console.log(trail);
+        console.log('');
+        // trail.previewUrl = 'img/default.png';
+        trail = operationOnTrails.process(trail);
+        console.log(trail);
+        console.log('');
+
+        commune.findOrCreateByName(trail.commune,
+            (err, commune) => {
+                trail.commune = commune._id;
+                model.create(trail,
+                    (err, trail) => {
+                        if (err) {
+                            console.error(err);
+                            res.status(500).send({
+                                err
+                            });
+                        } else {
+                            imageDownloader(trail, __dirname + '/../public/img');
+                            res.json({
+                                success: true,
+                                created: trail
+                            });
+                        }
+                    });
             });
     }
 }

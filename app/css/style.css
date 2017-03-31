@@ -177,6 +177,14 @@
   background-color: rgba(170, 174, 24, 0.5);
   position: relative;
 }
+
 .postComment {
 margin-top: 2%;
+}
+
+/* TODO à améliorer */
+button:disabled {
+    background-color: lightgrey;
+    color: black;
+    opacity: .75;
 }
