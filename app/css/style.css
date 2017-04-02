@@ -11,7 +11,7 @@
 /*Home*/
 
 .couv {
-    background-image: url("../img/couv3.jpg");
+    background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
     height: 450px;
@@ -48,7 +48,7 @@
 
 .weather {
     float: left;
-    height: 175px;
+    max-height: 175px;
     font-size: 0.8em;
     border: solid;
     border-radius: 6px;
@@ -119,7 +119,7 @@
 }
 
 .fond {
-    background-image: url("../img/couv3.jpg");
+    background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
     min-height: 600px;
