@@ -1,6 +1,6 @@
 
 <form class="form-inline" ng-submit="applyFilters()">
-<select ng-model="filterDistance" name="distance" class="form-control" >
+<select ng-model="filter.distance" name="distance" class="form-control" >
 <option disabled selected value="">Distance</option>
 <option value="[0,5]">de 0 à 5 km</option>
 <option value="[6,10]">de 6 à 10 km</option>
@@ -10,17 +10,17 @@
 <option value="[41]">Plus de 41 km</option>
 </select>
 
-<select ng-options="City.id as City.commune for City in Cities | orderBy:'commune'" ng-model="filterCity" name="Commune" class="form-control" >
+<select ng-options="city.id as city.commune for city in cities | orderBy:'commune'" ng-model="filter.commune" name="Commune" class="form-control" >
 <option disabled selected value="">Commune</option>
 </select>
 
-<select ng-model="filterRating" name="distance" class="form-control" >
+<select ng-model="filter.note" name="distance" class="form-control" >
 <option disabled selected value="">Note</option>
-<option value="[1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
-<option value="[2]">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
-<option value="[3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
-<option value="[4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
-<option value="[5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+<option value="[-0.1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
+<option value="[1, 2],">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
+<option value="[2, 3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
+<option value="[3, 4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
+<option value="[4, 5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
 </select>
 
 <button type='submit'>Chercher</button>

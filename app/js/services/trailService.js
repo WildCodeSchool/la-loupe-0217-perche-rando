@@ -4,11 +4,14 @@
 angular.module('app')
     .service('TrailService', function($http) {
         return {
-            getAll: function() {
-                return $http.get('/trails');
+            getList: function(filters) {
+                console.log('filter', filters);
+                return $http.get('/trails/', {
+                    params: filters
+                });
             },
             getOne: function(id) {
-                return $http.get('/trails/' + id);
+                return $http.get(`/trails/${id}`);
             },
             create: function(trail) {
                 return $http.post('/trails/', trail);
@@ -19,8 +22,5 @@ angular.module('app')
             getAllByUser: function(userId) {
                 // TODO à compléter
             },
-            getList: function (list) {
-                return $http.get('/trails');
-            }
         };
     });

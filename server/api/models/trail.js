@@ -20,6 +20,9 @@ const trailSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    note:{
+        type: Number
+    },
     name: {
         type: String,
         default: "Circuit"
@@ -42,12 +45,32 @@ let model = mongoose.model('Trail', trailSchema);
 export default class Trail {
 
     findAll(req, res) {
-        model.find({})
+        console.log('URL', req.originalUrl);
+        let query = {};
+        if(req.query.commune) {
+            query.commune = req.query.commune;
+        }
+        if(req.query.distance) {
+            query.distance = {
+                $gte: req.query.distance[0],
+                $lte: req.query.distance[1]
+            };
+        }
+        if(req.query.note) {
+            query.note = {
+                $gt: req.query.note[0],
+                $lte: req.query.note[1]
+            };
+        }
+        console.log('query', query);
+
+        model.find(query)
             .populate('commune')
             .exec((err, trails) => {
                 if (err || !trails) {
                     res.sendStatus(403);
                 } else {
+                    console.log('trails', trails);
                     res.json(trails);
                 }
             });
