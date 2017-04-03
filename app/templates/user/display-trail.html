@@ -15,6 +15,9 @@
                         </ng-map>
                     </div>
                 </div>
+                <div class="subHeaderColright">
+                    <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne: {{trail.distance.toFixed(2)/3}} heures</h4>
+                </div>
             </div>
         </div>
 
@@ -27,7 +30,7 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                        <div ng-repeat='meteo in weather' ng-if="$index % 8 == 0" class='weather'>
+                        <div ng-repeat='meteo in weather' class='weather'>
                             <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
                             <p class="temp">{{meteo.main.temp}}°C</p>
                             <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
@@ -40,7 +43,7 @@
             <div class="blocColRight">
                 <h2 class='titleColright'>Commentaires</h2>
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
-                    <p class="subHeaderColright">De {{comment.author._id}}</p>
+                    <p class="subHeaderColright">De {{comment.author.firstname}} {{comment.author.lastname}}</p>
                     <p class="commentDate">le {{comment.date | date : 'medium'}}</p>
                     <p class="commentContent">{{comment.content}}</p>
                 </div>

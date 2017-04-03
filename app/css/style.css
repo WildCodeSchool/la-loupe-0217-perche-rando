@@ -11,7 +11,7 @@
 /*Home*/
 
 .couv {
-    background-image: url("../img/couv3.jpg");
+    background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
     height: 450px;
@@ -48,7 +48,7 @@
 
 .weather {
     float: left;
-    height: 175px;
+    height: 180px;
     font-size: 0.8em;
     border: solid;
     border-radius: 6px;
@@ -122,7 +122,7 @@
     background-image: url("../img/couv3.jpg");
     background-position: bottom;
     background-size: cover;
-    min-height: 600px;
+    min-height: 800px;
     margin-top: -27px;
     border-radius: 6px;
 }
@@ -186,6 +186,7 @@ margin-top: 2%;
     font-family: 'Salsa-Regular';
     font-size: 1em;
     color: #f6a327;
+    text-shadow: 0.1em 0.1em 0px #6B6E11;
 }
 
 /* TODO à améliorer */

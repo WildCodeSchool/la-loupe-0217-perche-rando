@@ -11,4 +11,9 @@ angular.module('app')
                 console.log('Result of query', res);
             });
         };
+
+        CommuneService.getAll().then(function(res) {
+            $scope.cities = res.data;
+            console.log('cities', $scope.cities);
+          });
     });

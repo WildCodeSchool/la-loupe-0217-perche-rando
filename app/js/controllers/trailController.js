@@ -11,26 +11,41 @@ angular.module('app')
 
         TrailService.getOne($scope.idTrail).then(function(res) {
 
-            $scope.trail = res.data;
-            console.log(res.data);
-            NgMap.getMap().then(function(map) {
-                map.setCenter(toGmapsCenter($scope.trail.center));
-                map.setZoom($scope.trail.zoom);
-            });
+                $scope.trail = res.data;
+                console.log('res.data', res.data);
+                NgMap.getMap().then(function(map) {
+                    map.setCenter(toGmapsCenter($scope.trail.center));
+                    map.setZoom($scope.trail.zoom);
+                });
 
-            $scope.Ville = res.data.commune;
-            WeatherService.getWeather($scope.Ville.name).then(function(res) {
-                console.log('Weather', res);
-                $scope.weather = res.data.list;
-            }, function(err) {
-                console.log('OpenWeatherMapError', err);
-            });
+                $scope.Ville = res.data.commune;
+                WeatherService.getWeather($scope.Ville.name).then(function(res) {
+                    console.log('Weather', res);
+                    $scope.weather = res.data.list.filter(function(weather) {
+                        return weather.dt_txt.substring(11) === '12:00:00';
+                    });
+                    console.log('weather filter', $scope.weather);
+                }, function(err) {
+                    console.log('OpenWeatherMapError', err);
+                });
+                $scope.time = function(time) {
+                    time = trail.distance.toFixed(2) / 3;
 
-        }, function(err) {
-            $scope.error.show = true;
-            $scope.error.content = err.statusText;
-            console.log(err);
-        });
+                    return (function(i) {
+                            return i + (Math.round(((time - i) * 60), 10) / 100);
+                        })(parseInt(time, 10));
+                        
+
+                };
+
+
+
+            },
+            function(err) {
+                $scope.error.show = true;
+                $scope.error.content = err.statusText;
+                console.log(err);
+            });
 
         $scope.changeDate = function(date) {
             date = date.substring(0, 10).split("-").reverse().join("-");
@@ -69,7 +84,7 @@ angular.module('app')
         }
 
         $scope.toGmapsCoordinates = function(geoJSONLineString) {
-            console.log('geoJSONLineString', geoJSONLineString);
+            // console.log('geoJSONLineString', geoJSONLineString);
             return geoJSONLineString.coordinates.map(point => [point[1], point[0]]);
         };
     });

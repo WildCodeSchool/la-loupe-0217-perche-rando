@@ -42,12 +42,4 @@ export default class Commune {
             name
         }, callback);
     }
-
-    // TODO create actual function
-    create(req, res) {
-        model.create(req.body,
-            (err, commune) => {
-                res.status(500);
-            });
-    }
 }
