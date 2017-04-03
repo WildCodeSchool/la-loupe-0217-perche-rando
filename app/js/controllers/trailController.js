@@ -28,18 +28,6 @@ angular.module('app')
                 }, function(err) {
                     console.log('OpenWeatherMapError', err);
                 });
-                $scope.time = function(time) {
-                    time = trail.distance.toFixed(2) / 3;
-
-                    return (function(i) {
-                            return i + (Math.round(((time - i) * 60), 10) / 100);
-                        })(parseInt(time, 10));
-                        
-
-                };
-
-
-
             },
             function(err) {
                 $scope.error.show = true;
@@ -50,6 +38,11 @@ angular.module('app')
         $scope.changeDate = function(date) {
             date = date.substring(0, 10).split("-").reverse().join("-");
             return date;
+        };
+
+        $scope.time = function(trail) {
+            time = trail.distance.toFixed(2) / 3;
+            return `${Math.floor(time)} h ${((time % 1) * 60).toFixed(0)} mn`;
         };
 
         $scope.addComment = function() {

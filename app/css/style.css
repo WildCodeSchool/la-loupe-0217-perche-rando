@@ -14,7 +14,7 @@
     background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
-    height: 450px;
+    height: 500px;
     margin-top: -23px;
 }
 
@@ -187,6 +187,15 @@ margin-top: 2%;
     font-size: 1em;
     color: #f6a327;
     text-shadow: 0.1em 0.1em 0px #6B6E11;
+}
+/*profil*/
+.subHeaderProfile {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 2px;
+}
+.inputProfile {
+  margin-left: 20px;
 }
 
 /* TODO à améliorer */
