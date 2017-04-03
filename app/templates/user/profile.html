@@ -1,10 +1,31 @@
 <div class="container-fluid fond">
-    <div class="container">
+    <div class="row">
+        <div class="col-md-7">
 
-        <span class="subHeaderProfile">Profil de</span>
-        <h1 class="titleColPages">{{user.firstname}} {{user.lastname}}</h1>
+            <h4 class="subHeaderProfile">Profil de</h4>
 
-        <p class="subHeaderProfile">Prénom<input class="inputProfile" type="text" placeholder={{user.firstname}}></p>
+        </div>
+        <div class="col-md-5 coldroite">
+          <div class="blocColRight">
+          <h1 class="titleColright">{{user.firstname}} {{user.lastname}}</h1>
 
-  </div>
+          <table class="tableProfile">
+              <tr>
+                  <td class="subHeaderProfile">Firstname</td>
+                  <td><input class="inputProfile" type="text" placeholder={{user.firstname}}></td>
+              </tr>
+              <tr>
+                  <td class="subHeaderProfile">Lastname</td>
+                  <td><input class="inputProfile" type="text" placeholder={{user.lastname}}></td>
+              </tr>
+              <tr>
+                  <td class="subHeaderProfile">Email Address</td>
+                  <td><input class="inputProfile" type="email" placeholder={{user.email}}></td>
+              </tr>
+              <td class="subHeaderProfile">Password</td>
+              <td><input class="inputProfile" type="password" placeholder></td>
+          </table>
+        </div>
+        </div>
+    </div>
 </div>

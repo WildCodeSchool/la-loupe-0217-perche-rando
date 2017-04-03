@@ -4,7 +4,8 @@ angular.module('app')
         firstname: '',
         lastname: '',
         email: '',
-        password: ''
+        password: '',
+        img: ''
       };
       console.log('user', $scope.user);
 

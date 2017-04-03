@@ -192,10 +192,21 @@ margin-top: 2%;
 .subHeaderProfile {
   font-family: 'Francois One', sans-serif;
   color: #f6a327;
-  margin-top: 2px;
+  margin-top: 35px;
+}
+.titleProfile {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 0px;
 }
 .inputProfile {
   margin-left: 20px;
+}
+.tableProfile td {
+  padding: 10px;
+}
+#profileInputFile {
+  
 }
 
 /* TODO à améliorer */
