@@ -8,8 +8,9 @@ module.exports = (app) => {
 
     var trail = new Trail();
 
-    // TODO make it possible to filter some of the trails with paramters (commune, notation ...)
     router.get('/', Auth.hasAuthorization, trail.findAll);
+
+    router.get('/count/:trailsPerPages', Auth.hasAuthorization, trail.count);
 
     router.get('/:id', Auth.hasAuthorization, trail.findById);
 

@@ -1,12 +1,23 @@
 /*
-* Service utilisé pour travailer les circuits de randonnés
-*/
+ * Service utilisé pour travailer les circuits de randonnés
+ */
 angular.module('app')
     .service('TrailService', function($http) {
         return {
-            getList: function(filters) {
-                console.log('filter', filters);
+            getList: function(filters, limit, offset) {
+                if (limit !== undefined) {
+                    filters.limit = limit;
+                }
+                if (offset !== undefined) {
+                    filters.offset = offset;
+                }
+
                 return $http.get('/trails/', {
+                    params: filters
+                });
+            },
+            getCount: function(filters, trailsPerPages) {
+                return $http.get(`/trails/count/${trailsPerPages}`, {
                     params: filters
                 });
             },

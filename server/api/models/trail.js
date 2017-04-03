@@ -16,12 +16,17 @@ const trailSchema = new mongoose.Schema({
         required: true,
         ref: 'Commune'
     },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
     distance: {
         type: Number,
         required: true
     },
-    note:{
-        type: Number
+    notes:{
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Note'
     },
     name: {
         type: String,
@@ -42,36 +47,69 @@ const trailSchema = new mongoose.Schema({
 
 let model = mongoose.model('Trail', trailSchema);
 
+const buildQueryWithFilters = (req) => {
+
+    console.log('URL', req.originalUrl);
+    console.log('Get Params:', req.query);
+    let query = {};
+    let limit = Number(req.query.limit) || 10;
+    let offset = Number(req.query.offset);
+
+    if(req.query.commune) {
+        query.commune = req.query.commune;
+    }
+    if(req.query.distance) {
+        let distance = JSON.parse(req.query.distance);
+        query.distance = {
+            $gte: distance[0],
+            $lte: distance[1]
+        };
+    }
+    if(req.query.note) {
+        let noteMin = req.query.note[0];
+        let noteMax = req.query.note[1];
+    }
+
+    console.log('query', query, '| limit', limit, '| offset', offset);
+    return query;
+};
+
+
 export default class Trail {
 
     findAll(req, res) {
-        console.log('URL', req.originalUrl);
-        let query = {};
-        if(req.query.commune) {
-            query.commune = req.query.commune;
-        }
-        if(req.query.distance) {
-            query.distance = {
-                $gte: req.query.distance[0],
-                $lte: req.query.distance[1]
-            };
-        }
-        if(req.query.note) {
-            query.note = {
-                $gt: req.query.note[0],
-                $lte: req.query.note[1]
-            };
-        }
-        console.log('query', query);
+        let query = buildQueryWithFilters(req);
+        let limit = Number(req.query.limit) || 10;
+        let offset = Number(req.query.offset);
 
         model.find(query)
             .populate('commune')
+            .populate('author')
+            .limit(limit)
+            .skip(offset)
             .exec((err, trails) => {
-                if (err || !trails) {
-                    res.sendStatus(403);
+                if (err) {
+                    console.log(err);
+                    res.sendStatus(403).send({err});
                 } else {
-                    console.log('trails', trails);
-                    res.json(trails);
+                    // if (trails) {
+                    //     if(req.query.note) {
+                    //         trails = trails.filter( trail => {
+                    //             let avg = trail.notes.reduce( (sum, note) => {
+                    //                 return sum + note;
+                    //             }, 0) / trail.notes.length;
+                    //             return noteMin < avg && avg <= noteMax;
+                    //         });
+                    //     }
+                        console.log(trails.length, 'trails found');
+                        res.json({
+                            trails: trails
+                        });
+                    // } else {
+                    //     res.json({
+                    //         message: 'No trails found'
+                    //     });
+                    // }
                 }
             });
     }
@@ -79,6 +117,7 @@ export default class Trail {
     findById(req, res) {
         model.findById(req.params.id)
             .populate('commune')
+            .populate('author')
             .exec((err, trail) => {
                 if (err || !trail) {
                     res.sendStatus(403);
@@ -88,15 +127,33 @@ export default class Trail {
             });
     }
 
-    // TODO include the bits about downloading the image
+    count(req, res){
+        let query = buildQueryWithFilters(req);
+        let limit = Number(req.query.limit) || 10;
+        let offset = Number(req.query.offset);
+
+        model.count(query, (err, count) => {
+                console.log('COUNT', count);
+                if (err || count === undefined || count === null) {
+                    res.sendStatus(403);
+                } else {
+                    let pages = Math.ceil(count / req.params.trailsPerPages);
+                    console.log(count, 'trails founds | this gives us:', pages);
+                    res.json({
+                        total: count,
+                        pages: pages,
+                        trailsPerPages: req.params.trailsPerPages
+                    });
+                }
+            });
+    }
+
+    // TODO include the bits about the image url
     create(req, res) {
         let trail = req.body;
-        console.log(trail);
-        console.log('');
+
         // trail.previewUrl = 'img/default.png';
-        trail = operationOnTrails.process(trail);
-        console.log(trail);
-        console.log('');
+        trail = operationOnTrails.process(trail);        
 
         commune.findOrCreateByName(trail.commune,
             (err, commune) => {
