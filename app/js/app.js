@@ -1,1 +1,1 @@
-angular.module('app', ['ui.router', 'ui.bootstrap', 'ngMap', 'base64']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'ngMap', 'naif.base64']);

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-6 col-xs-offset-3">
-        <form class="form" name="loginForm" novalidate ng-submit="register()">
+        <form class="form" name="loginForm" novalidate ng-submit="coucou()">
             <div ng-repeat="error in errors">{{error.error}}</div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -20,7 +20,7 @@
             </div>
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
-                <input id="profileInputFile" type="file" ng-model="user.img" class="form-control" >
+                <input id="profileInputFile" type="file" ng-model="user.img" base-sixty-four-input class="form-control" >
             </div>
             <button type="submit" class="btn btn-primary btn-block">Register</button>
         </form>
