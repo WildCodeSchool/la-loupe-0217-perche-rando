@@ -1,7 +1,7 @@
 
 <form class="form-inline" ng-submit="goToPage(0)">
 <select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control" >
-<option disabled selected value="">Distance</option>
+<option selected value="">Toutes les distances</option>
 <option value="[0,5]">de 0 à 5 km</option>
 <option value="[6,10]">de 6 à 10 km</option>
 <option value="[11,20]">de 11 à 20 km</option>
@@ -11,11 +11,12 @@
 </select>
 
 <select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control" >
-<option disabled selected value="">Commune</option>
+<option selected value="">Toutes les communes</option>
 </select>
 
 <select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control" >
-<option disabled selected value="">Note</option>
+<option selected value="">Toutes les notes</option>
+<option value="[-2, -1]">Sans note</option>
 <option value="[-0.1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
 <option value="[1, 2],">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
 <option value="[2, 3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
@@ -32,7 +33,6 @@
     {{ trail._id }} / {{ trail.name }} / {{ trail.author.name }} / {{ trail.distance}} par {{ trail.author.firstname }} {{ trail.author.lastname }}
 </div>
 
-{{ count }}
 <ul class="pagination pagination-lg">
   <li ng-repeat="page in pages"><button ng-click="goToPage(page)">{{ page + 1 }}</button></li>
 </ul>

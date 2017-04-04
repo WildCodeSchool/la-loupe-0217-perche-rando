@@ -92,24 +92,28 @@ export default class Trail {
                     console.log(err);
                     res.sendStatus(403).send({err});
                 } else {
-                    // if (trails) {
-                    //     if(req.query.note) {
-                    //         trails = trails.filter( trail => {
-                    //             let avg = trail.notes.reduce( (sum, note) => {
-                    //                 return sum + note;
-                    //             }, 0) / trail.notes.length;
-                    //             return noteMin < avg && avg <= noteMax;
-                    //         });
-                    //     }
+                    if (trails) {
+                        if(req.query.note) {
+                            trails = trails.filter( trail => {
+                                if (noteMin === -2 && noteMax === -1) {
+                                    return trail.notes.length === 0;
+                                }
+                                
+                                let avg = trail.notes.reduce( (sum, note) => {
+                                    return sum + note;
+                                }, 0) / trail.notes.length;
+                                return noteMin < avg && avg <= noteMax;
+                            });
+                        }
                         console.log(trails.length, 'trails found');
                         res.json({
                             trails: trails
                         });
-                    // } else {
-                    //     res.json({
-                    //         message: 'No trails found'
-                    //     });
-                    // }
+                    } else {
+                        res.json({
+                            message: 'No trails found'
+                        });
+                    }
                 }
             });
     }
@@ -153,7 +157,7 @@ export default class Trail {
         let trail = req.body;
 
         // trail.previewUrl = 'img/default.png';
-        trail = operationOnTrails.process(trail);        
+        trail = operationOnTrails.process(trail);
 
         commune.findOrCreateByName(trail.commune,
             (err, commune) => {

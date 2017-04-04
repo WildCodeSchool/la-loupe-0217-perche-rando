@@ -8,15 +8,10 @@ const noteSchema = new mongoose.Schema({
         required: true,
         ref: 'User'
     },
-    trail: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: 'Trail'
-    },
     note: {
         type: Number,
-        required:true,
-        default: 2
+        required: true,
+        max: [5, 'Une note ne peux être supérieure à 5']
     }
 });
 
