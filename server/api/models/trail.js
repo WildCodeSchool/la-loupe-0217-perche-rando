@@ -1,6 +1,7 @@
 import geojson from 'mongoose-geojson-schema';
 import mongoose from 'mongoose';
 import Commune from './commune.js';
+import Note from './note.js';
 import operationOnTrails from '../lib/operation-on-trails.js';
 import imageDownloader from '../lib/download-image.js';
 
@@ -24,10 +25,10 @@ const trailSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    notes:{
-        type: [mongoose.Schema.Types.ObjectId],
+    notes: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Note'
-    },
+    }],
     name: {
         type: String,
         default: "Circuit"
@@ -55,19 +56,15 @@ const buildQueryWithFilters = (req) => {
     let limit = Number(req.query.limit) || 10;
     let offset = Number(req.query.offset);
 
-    if(req.query.commune) {
+    if (req.query.commune) {
         query.commune = req.query.commune;
     }
-    if(req.query.distance) {
+    if (req.query.distance) {
         let distance = JSON.parse(req.query.distance);
         query.distance = {
             $gte: distance[0],
             $lte: distance[1]
         };
-    }
-    if(req.query.note) {
-        let noteMin = req.query.note[0];
-        let noteMax = req.query.note[1];
     }
 
     console.log('query', query, '| limit', limit, '| offset', offset);
@@ -81,31 +78,39 @@ export default class Trail {
         let query = buildQueryWithFilters(req);
         let limit = Number(req.query.limit) || 10;
         let offset = Number(req.query.offset);
+        let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
+        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
+
 
         model.find(query)
             .populate('commune')
             .populate('author')
+            .populate('notes')
             .limit(limit)
             .skip(offset)
             .exec((err, trails) => {
                 if (err) {
                     console.log(err);
-                    res.sendStatus(403).send({err});
+                    res.sendStatus(403).send({
+                        err
+                    });
                 } else {
+                    console.log(trails.length, 'trails found before filtering');
                     if (trails) {
-                        if(req.query.note) {
-                            trails = trails.filter( trail => {
-                                if (noteMin === -2 && noteMax === -1) {
-                                    return trail.notes.length === 0;
-                                }
-                                
-                                let avg = trail.notes.reduce( (sum, note) => {
-                                    return sum + note;
-                                }, 0) / trail.notes.length;
-                                return noteMin < avg && avg <= noteMax;
-                            });
-                        }
-                        console.log(trails.length, 'trails found');
+                        // if (req.query.note) {
+                        //     trails = trails.filter(trail => {
+                        //         if (noteMin === -2 && noteMax === -1) {
+                        //             return trail.notes.length === 0;
+                        //         }
+                        //
+                        //         let avg = trail.notes.reduce((sum, note) => {
+                        //             return sum + note.note;
+                        //         }, 0) / trail.notes.length;
+                        //         console.log('average :', avg);
+                        //         return noteMin < avg && avg <= noteMax;
+                        //     });
+                        // }
+                        // console.log(trails, 'trails found after filtering');
                         res.json({
                             trails: trails
                         });
@@ -131,25 +136,27 @@ export default class Trail {
             });
     }
 
-    count(req, res){
+    count(req, res) {
         let query = buildQueryWithFilters(req);
         let limit = Number(req.query.limit) || 10;
         let offset = Number(req.query.offset);
+        let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
+        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
 
         model.count(query, (err, count) => {
-                console.log('COUNT', count);
-                if (err || count === undefined || count === null) {
-                    res.sendStatus(403);
-                } else {
-                    let pages = Math.ceil(count / req.params.trailsPerPages);
-                    console.log(count, 'trails founds | this gives us:', pages);
-                    res.json({
-                        total: count,
-                        pages: pages,
-                        trailsPerPages: req.params.trailsPerPages
-                    });
-                }
-            });
+            console.log('COUNT', count);
+            if (err || count === undefined || count === null) {
+                res.sendStatus(403);
+            } else {
+                let pages = Math.ceil(count / req.params.trailsPerPages);
+                console.log(count, 'trails founds | this gives us:', pages);
+                res.json({
+                    total: count,
+                    pages: pages,
+                    trailsPerPages: req.params.trailsPerPages
+                });
+            }
+        });
     }
 
     // TODO include the bits about the image url
