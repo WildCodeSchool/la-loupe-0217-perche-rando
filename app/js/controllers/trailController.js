@@ -8,6 +8,7 @@ angular.module('app')
             'content': '',
             'show': false
         };
+        $scope.rating = 3;
 
         TrailService.getOne($scope.idTrail).then(function(res) {
 
@@ -28,13 +29,14 @@ angular.module('app')
                 }, function(err) {
                     console.log('OpenWeatherMapError', err);
                 });
+
                 $scope.time = function(time) {
                     time = trail.distance.toFixed(2) / 3;
 
                     return (function(i) {
                             return i + (Math.round(((time - i) * 60), 10) / 100);
                         })(parseInt(time, 10));
-                        
+
 
                 };
 
@@ -50,6 +52,14 @@ angular.module('app')
         $scope.changeDate = function(date) {
             date = date.substring(0, 10).split("-").reverse().join("-");
             return date;
+        };
+
+        $scope.updateRating = function(rating) {
+            NoteService.update($scope.idTrail, CurrentUser.user()._id, rating).then(function(res) {
+                console.log('The user voted', res.data);
+            }, function(err){
+                console.error('Erreur Note', err);
+            });
         };
 
         $scope.addComment = function() {

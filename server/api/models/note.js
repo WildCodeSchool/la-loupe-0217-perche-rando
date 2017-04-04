@@ -21,7 +21,7 @@ const noteSchema = new mongoose.Schema({
         ref: 'Trail'
     }
 });
-communeSchema.plugin(findOrCreate);
+noteSchema.plugin(findOrCreate);
 
 let model = mongoose.model('Note', noteSchema);
 

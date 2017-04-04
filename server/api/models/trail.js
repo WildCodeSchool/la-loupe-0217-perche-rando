@@ -103,7 +103,7 @@ export default class Trail {
                         //             return trail.notes.length === 0;
                         //         }
                         //
-                        //         let avg = trail.notes.reduce((sum, note) => {
+                                // let avg = trail.notes.reduce((sum, note) => {
                         //             return sum + note.note;
                         //         }, 0) / trail.notes.length;
                         //         console.log('average :', avg);
