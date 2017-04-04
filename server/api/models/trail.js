@@ -37,10 +37,16 @@ const trailSchema = new mongoose.Schema({
     nodes: {
         type: mongoose.Schema.Types.LineString,
         required: true
-    },
-    previewUrl: {
-        type: String
     }
+    // notes: [{
+    //     user: {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'User'
+    //     },
+    //     value: {
+    //         type: Number
+    //     }
+    // }]
 });
 
 let model = mongoose.model('Trail', trailSchema);
@@ -68,27 +74,6 @@ const buildQueryWithFilters = (req) => {
     return query;
 };
 
-function getAverage(trail) {
-    let notes = note.findAllForTrail(trail._id);
-    let avg = notes.lenght > 0 ? notes.reduce( (note, sum) => {
-        return sum + note.note;
-    }) / notes.length : -1;
-    return avg;
-}
-
-function filterByAverageNote(trails, callback) {
-    trails = trails.map((trail) => {
-
-    })
-
-    trails = trails.filter(trail => {
-        let avg = getAverage(trail, );
-        return noteMin < avg && avg <= noteMax;
-    });
-    console.log(trails, 'trails found after filtering');
-}
-
-
 export default class Trail {
 
     findAll(req, res) {
@@ -96,7 +81,7 @@ export default class Trail {
         let limit = Number(req.query.limit) || 10;
         let offset = Number(req.query.offset);
         let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
-        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
+        let noteMax = req.query.note !== undefined ? req.query.note[1] : 5;
 
 
         model.find(query)
@@ -116,7 +101,7 @@ export default class Trail {
                         if (req.query.note) {
                             filterByAverageNote(trails, function(trails) {
                                 res.json({
-                                    trails: trails
+                                    trails
                                 });
                             });
                         }
@@ -150,7 +135,7 @@ export default class Trail {
         let limit = Number(req.query.limit) || 10;
         let offset = Number(req.query.offset);
         let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
-        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
+        let noteMax = req.query.note !== undefined ? req.query.note[1] : 5;
 
         model.count(query, (err, count) => {
             console.log('COUNT', count);
@@ -194,5 +179,16 @@ export default class Trail {
                         }
                     });
             });
+    }
+
+    noteTrail(req, res) {
+        let trailId = req.params.trailId,
+            value= req.params.value;
+
+        model.update({
+            _id:trailId
+        }, {
+
+        });
     }
 }

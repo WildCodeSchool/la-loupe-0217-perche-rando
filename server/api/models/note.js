@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import trail from './trail.js';
 import user from './user.js';
-import findOrCreate from 'mongoose-findorcreate';
 
 
 const noteSchema = new mongoose.Schema({
@@ -21,34 +20,36 @@ const noteSchema = new mongoose.Schema({
         ref: 'Trail'
     }
 });
-noteSchema.plugin(findOrCreate);
 
 let model = mongoose.model('Note', noteSchema);
 
 export default class Note {
+
     createOrUpdate(req, res) {
-        console.log(req.originalUrl);
-        console.log(req.body);
-        model.findOrCreate({
+        model.update({
             user: req.params.userId,
             trail: req.params.trailId
         }, {
+            user: req.params.userId,
+            trail: req.params.trailId,
             note: req.body.note
-        }, (err, note) => {
+        }, {
+            upsert: true
+        }).exec((err, note) => {
             if (err || !note) {
                 res.sendStatus(403);
             } else {
                 res.json({
-                    success:"true",
+                    success: "true",
                     note
                 });
             }
         });
     }
 
-    findAllForTrail(trailId, callback) {
+    averageOfTrail(trailId, callback) {
         model.find({
-            trail:trailId
+            trail: trailId
         }, callback);
     }
 }
