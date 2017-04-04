@@ -30,9 +30,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    img: {
-      base64: {type: String}
-    },
     isAdmin: {
         type: Boolean,
         default: false

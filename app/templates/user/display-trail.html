@@ -48,7 +48,7 @@
             <div class="blocColRight">
                 <h2 class='titleColright'>Commentaires</h2>
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
-                    <p class="subHeaderColright">De {{comment.author.firstname}} {{comment.author.lastname}}</p>
+                    <p class="subHeaderColright"><img class="imgGravatarComment" src="http://www.gravatar.com/avatar/{{ comment.author.email | gravatar }}?d=identicon">De {{comment.author.firstname}} {{comment.author.lastname}}</p>
                     <p class="commentDate">le {{comment.date | date : 'medium'}}</p>
                     <p class="commentContent">{{comment.content}}</p>
                 </div>
