@@ -1,1 +1,1 @@
-angular.module('app', ['ui.router', 'ui.bootstrap', 'ngMap']);
+angular.module('app', ['ui.router', 'ui.bootstrap', 'ngMap', 'jkAngularRatingStars']);

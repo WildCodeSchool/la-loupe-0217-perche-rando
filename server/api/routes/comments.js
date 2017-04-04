@@ -9,9 +9,9 @@ module.exports = (app) => {
 
     var comment = new Comment();
 
-    router.get('/byTrail/:idTrail', comment.findByTrailId);
+    router.get('/byTrail/:idTrail', Auth.hasAuthorization, comment.findByTrailId);
 
-    router.post('/', comment.create);
+    router.post('/', Auth.hasAuthorization, comment.create);
 
     app.use('/comments', router);
 };

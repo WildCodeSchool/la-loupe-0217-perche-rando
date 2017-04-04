@@ -8,6 +8,7 @@ angular.module('app')
             'content': '',
             'show': false
         };
+        $scope.rating = 3;
 
         TrailService.getOne($scope.idTrail).then(function(res) {
 
@@ -43,6 +44,14 @@ angular.module('app')
         $scope.time = function(trail) {
             time = trail.distance.toFixed(2) / 3;
             return `${Math.floor(time)} h ${((time % 1) * 60).toFixed(0)} mn`;
+        };
+
+        $scope.updateRating = function(rating) {
+            NoteService.update($scope.idTrail, CurrentUser.user()._id, rating).then(function(res) {
+                console.log('The user voted', res.data);
+            }, function(err){
+                console.error('Erreur Note', err);
+            });
         };
 
         $scope.addComment = function() {
