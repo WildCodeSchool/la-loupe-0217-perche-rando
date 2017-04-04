@@ -8,7 +8,7 @@ module.exports = (app) => {
 
     var note = new Note();
 
-    router.get('/average/:noteId', Auth.hasAuthorization, note.averageOfTrail);
+    router.get('/average/:trailId', Auth.hasAuthorization, note.averageOfTrail);
 
     router.post('/on/:trailId/by/:userId', Auth.hasAuthorization, note.createOrUpdate);
 

@@ -28,6 +28,13 @@ angular.module('app')
                 }, function(err) {
                     console.log('OpenWeatherMapError', err);
                 });
+
+                NoteService.getAverage($scope.idTrail).then(function(res) {
+                    $scope.average = res.data.average;
+                    console.log('Average rating of trail', $scope.average);
+                }, function(err) {
+                    console.error('Erreur average', err);
+                });
             },
             function(err) {
                 $scope.error.show = true;

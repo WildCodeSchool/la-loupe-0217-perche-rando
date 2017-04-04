@@ -47,9 +47,28 @@ export default class Note {
         });
     }
 
-    averageOfTrail(trailId, callback) {
-        model.find({
-            trail: trailId
-        }, callback);
+    averageOfTrail(req, res) {
+        console.log('Received request for the average rating of', req.params.trailId);
+        model.aggregate([{
+            $match: {
+                trail: new mongoose.Types.ObjectId(req.params.trailId)
+            }
+        }, {
+            $group: {
+                "_id": null,
+                "average": {
+                    "$avg": "$note"
+                }
+            }
+        }], (err, averages) => {
+            console.log('average', averages);
+            if (err || averages === undefined) {
+                res.sendStatus(403);
+            } else {
+                res.json({
+                    average:averages[0].average
+                });
+            }
+        });
     }
 }

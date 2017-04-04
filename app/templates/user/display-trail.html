@@ -17,8 +17,8 @@
                 </div>
                 <div class="subHeaderColright">
                     <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4>
-                    <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
-
+                    Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
+                    Moyenne : <jk-rating-stars rating="average" max-rating="5" read-only="true"></jk-rating-stars>
                 </div>
             </div>
         </div>

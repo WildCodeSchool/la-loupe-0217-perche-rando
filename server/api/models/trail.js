@@ -180,15 +180,4 @@ export default class Trail {
                     });
             });
     }
-
-    noteTrail(req, res) {
-        let trailId = req.params.trailId,
-            value= req.params.value;
-
-        model.update({
-            _id:trailId
-        }, {
-
-        });
-    }
 }
