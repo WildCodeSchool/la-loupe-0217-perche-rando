@@ -1,5 +1,5 @@
 angular.module('app')
-    .controller('RegisterController', ['$scope', function($scope, $state, Auth) {
+    .controller('RegisterController', function($scope, $state, Auth) {
 
         $scope.user = {
             firstname: '',
@@ -8,14 +8,11 @@ angular.module('app')
             password: '',
             img: {}
         };
-
-        $scope.coucou = function () {
-          console.log('user', $scope.user);
-        };
         $scope.register = function() {
             Auth.register($scope.user).then(function() {
+              console.log($scope.user);
                 $state.go('anon.home');
             });
         };
 
-    }]);
+    });
