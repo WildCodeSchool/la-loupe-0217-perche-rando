@@ -2,7 +2,7 @@
  * Correspond à l'affichage d'un circuit
  */
 angular.module('app')
-    .controller('TrailController', function($scope, $stateParams, TrailService, NgMap, WeatherService, CommentService, CurrentUser) {
+    .controller('TrailController', function($scope, $stateParams, TrailService, NgMap, NoteService, WeatherService, CommentService, CurrentUser) {
         $scope.idTrail = $stateParams.id;
         $scope.error = {
             'content': '',
@@ -11,7 +11,6 @@ angular.module('app')
         $scope.rating = 3;
 
         TrailService.getOne($scope.idTrail).then(function(res) {
-
                 $scope.trail = res.data;
                 console.log('res.data', res.data);
                 NgMap.getMap().then(function(map) {
@@ -47,7 +46,8 @@ angular.module('app')
         };
 
         $scope.updateRating = function(rating) {
-            NoteService.update($scope.idTrail, CurrentUser.user()._id, rating).then(function(res) {
+            console.log("Updating rating ...");
+            NoteService.update(CurrentUser.user()._id, $scope.idTrail, {note:rating}).then(function(res) {
                 console.log('The user voted', res.data);
             }, function(err){
                 console.error('Erreur Note', err);
@@ -89,5 +89,5 @@ angular.module('app')
             // console.log('geoJSONLineString', geoJSONLineString);
             return geoJSONLineString.coordinates.map(point => [point[1], point[0]]);
         };
-        
+
     });

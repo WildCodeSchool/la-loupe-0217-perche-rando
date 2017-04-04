@@ -6,6 +6,7 @@ import operationOnTrails from '../lib/operation-on-trails.js';
 import imageDownloader from '../lib/download-image.js';
 
 let commune = new Commune();
+let note = new Note();
 
 const trailSchema = new mongoose.Schema({
     zoom: {
@@ -25,10 +26,6 @@ const trailSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    notes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Note'
-    }],
     name: {
         type: String,
         default: "Circuit"
@@ -71,6 +68,26 @@ const buildQueryWithFilters = (req) => {
     return query;
 };
 
+function getAverage(trail) {
+    let notes = note.findAllForTrail(trail._id);
+    let avg = notes.lenght > 0 ? notes.reduce( (note, sum) => {
+        return sum + note.note;
+    }) / notes.length : -1;
+    return avg;
+}
+
+function filterByAverageNote(trails, callback) {
+    trails = trails.map((trail) => {
+
+    })
+
+    trails = trails.filter(trail => {
+        let avg = getAverage(trail, );
+        return noteMin < avg && avg <= noteMax;
+    });
+    console.log(trails, 'trails found after filtering');
+}
+
 
 export default class Trail {
 
@@ -85,7 +102,6 @@ export default class Trail {
         model.find(query)
             .populate('commune')
             .populate('author')
-            .populate('notes')
             .limit(limit)
             .skip(offset)
             .exec((err, trails) => {
@@ -97,20 +113,13 @@ export default class Trail {
                 } else {
                     console.log(trails.length, 'trails found before filtering');
                     if (trails) {
-                        // if (req.query.note) {
-                        //     trails = trails.filter(trail => {
-                        //         if (noteMin === -2 && noteMax === -1) {
-                        //             return trail.notes.length === 0;
-                        //         }
-                        //
-                                // let avg = trail.notes.reduce((sum, note) => {
-                        //             return sum + note.note;
-                        //         }, 0) / trail.notes.length;
-                        //         console.log('average :', avg);
-                        //         return noteMin < avg && avg <= noteMax;
-                        //     });
-                        // }
-                        // console.log(trails, 'trails found after filtering');
+                        if (req.query.note) {
+                            filterByAverageNote(trails, function(trails) {
+                                res.json({
+                                    trails: trails
+                                });
+                            });
+                        }
                         res.json({
                             trails: trails
                         });

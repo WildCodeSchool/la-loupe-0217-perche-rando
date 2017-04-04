@@ -26,11 +26,14 @@ noteSchema.plugin(findOrCreate);
 let model = mongoose.model('Note', noteSchema);
 
 export default class Note {
-    // TODO add functions here
-    addNote(req, res) {
+    createOrUpdate(req, res) {
+        console.log(req.originalUrl);
+        console.log(req.body);
         model.findOrCreate({
-            user,
-            trail
+            user: req.params.userId,
+            trail: req.params.trailId
+        }, {
+            note: req.body.note
         }, (err, note) => {
             if (err || !note) {
                 res.sendStatus(403);
@@ -41,5 +44,11 @@ export default class Note {
                 });
             }
         });
+    }
+
+    findAllForTrail(trailId, callback) {
+        model.find({
+            trail:trailId
+        }, callback);
     }
 }
