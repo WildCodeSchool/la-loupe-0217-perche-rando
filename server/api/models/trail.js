@@ -47,7 +47,7 @@ const buildQueryWithFilters = (req) => {
     console.log('URL', req.originalUrl);
     console.log('Get Params:', req.query);
     let match = {};
-    let limit = Number(req.query.limit) || 10;
+    let limit = Number(req.query.limit);
     let skip = Number(req.query.offset);
 
     if (req.query.commune) {
@@ -69,7 +69,7 @@ const buildQueryWithFilters = (req) => {
     }
 
     console.log('match', match, '| limit', limit, '| offset', skip);
-    return [{
+    let query = [{
         "$lookup": {
             "from": "notes",
             "localField": "_id",
@@ -86,11 +86,21 @@ const buildQueryWithFilters = (req) => {
         }
     }, {
         "$match": match
-    }, {
-        "$limit": limit + skip
-    }, {
-        "$skip": skip
-    },{
+    }];
+
+    if (!isNaN(limit)) {
+        query.push({
+            "$limit": limit + skip
+        });
+    }
+
+    if (!isNaN(skip)) {
+        query.push({
+            "$skip": skip
+        });
+    }
+
+    query.concat([{
         "$lookup": {
             "from": "communes",
             "localField": "commune",
@@ -119,7 +129,8 @@ const buildQueryWithFilters = (req) => {
             "_v": 0,
             "isAdmin": 0
         }
-    }];
+    }]);
+    return query;
 };
 
 export default class Trail {
@@ -164,13 +175,16 @@ export default class Trail {
     count(req, res) {
         let query = buildQueryWithFilters(req);
 
-        model.count(query, (err, count) => {
-            if (err || count === undefined || count === null) {
-                res.sendStatus(403);
+        model.aggregate(query, (err, trails) => {
+            if (err || trails === undefined) {
+                res.status(500).send({
+                    err
+                });
             } else {
-                let pages = Math.ceil(count / req.params.trailsPerPages);
+                let length = trails.length;
+                let pages = Math.ceil(length / req.params.trailsPerPages);
                 res.json({
-                    total: count,
+                    total: length,
                     pages: pages,
                     trailsPerPages: req.params.trailsPerPages
                 });
@@ -178,11 +192,8 @@ export default class Trail {
         });
     }
 
-    // TODO include the bits about the image url
     create(req, res) {
         let trail = req.body;
-
-        // trail.previewUrl = 'img/default.png';
         trail = operationOnTrails.process(trail);
 
         commune.findOrCreateByName(trail.commune,

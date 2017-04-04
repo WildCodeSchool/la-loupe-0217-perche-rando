@@ -18,7 +18,7 @@ angular.module('app')
                 for(var i = 0; i < $scope.count.pages; i++) {
                     $scope.pages.push(i);
                 }
-                console.log($scope.count);
+                console.log('Count', $scope.count);
             }, function(err) {
                 console.error('Count error', err);
             });
@@ -44,5 +44,5 @@ angular.module('app')
             console.log('cities', $scope.cities);
           });
 
-          getList($scope.filters, TRAIL_PER_PAGES, 0);
+        getList($scope.filters, TRAIL_PER_PAGES, 0);
     });
