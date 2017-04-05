@@ -12,7 +12,6 @@ angular.module('app')
                 if (offset !== undefined) {
                     filters.offset = offset;
                 }
-
                 return $http.get('/trails/', {
                     params: filters
                 });
