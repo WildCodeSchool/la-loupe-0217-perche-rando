@@ -1,38 +1,52 @@
+<div class="container-fluid fond">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="blocMap">
+                <form class="form-inline tabList" ng-submit="goToPage(0)">
+                    <select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control">
+                      <option selected value="">Toutes les distances</option>
+                      <option value="[0,5]">de 0 à 5 km</option>
+                      <option value="[6,10]">de 6 à 10 km</option>
+                      <option value="[11,20]">de 11 à 20 km</option>
+                      <option value="[21,30]">de 21 à 30 km</option>
+                      <option value="[31,40]">de 31 à 40 km</option>
+                      <option value="[41, 9999]">Plus de 41 km</option>
+                    </select>
 
-<form class="form-inline" ng-submit="goToPage(0)">
-<select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control" >
-<option selected value="">Toutes les distances</option>
-<option value="[0,5]">de 0 à 5 km</option>
-<option value="[6,10]">de 6 à 10 km</option>
-<option value="[11,20]">de 11 à 20 km</option>
-<option value="[21,30]">de 21 à 30 km</option>
-<option value="[31,40]">de 31 à 40 km</option>
-<option value="[41, 9999]">Plus de 41 km</option>
-</select>
+                    <select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control">
+                      <option selected value="">Toutes les communes</option>
+                    </select>
 
-<select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control" >
-<option selected value="">Toutes les communes</option>
-</select>
+                    <select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control">
+                      <option selected value="">Toutes les notes</option>
+                      <option value="[-2, -1]">Sans note</option>
+                      <option value="[-1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
+                      <option value="[1, 2],">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
+                      <option value="[2, 3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
+                      <option value="[3, 4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
+                      <option value="[4, 5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+                    </select>
+                </form>
 
-<select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control" >
-<option selected value="">Toutes les notes</option>
-<option value="[-2, -1]">Sans note</option>
-<option value="[-1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
-<option value="[1, 2],">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
-<option value="[2, 3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
-<option value="[3, 4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
-<option value="[4, 5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-</select>
+                <!-- TODO better formatting -->
+                <div ng-repeat='trail in trails'>
+                    <div class="listTrail">
+                        <img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="">
+                        <p class="titleColright">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</p>
+                        <p>Par {{ trail.author.firstname}} {{ trail.author.lastname }}</p>
+                        <p>Le {{trail.date | date : longDate}}.</p>
+                    </div>
+                </div>
 
-<!-- TODO Décider si on le garde on si on reste sur du ng-change -->
-<!-- <button type='submit'>Chercher</button> -->
-</form>
+                <ul class="pagination pagination-lg">
+                    <li ng-repeat="page in pages"><button ng-click="goToPage(page)">{{ page + 1 }}</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-5 coldroite">
+            <div class='blocColRight'>
 
-<!-- TODO better formatting -->
-<div ng-repeat='trail in trails'>
-    {{ trail._id }} / {{ trail.name }} / {{ trail.author.name }} / {{ trail.distance}} par {{ trail.author.firstname }} {{ trail.author.lastname }}
+            </div>
+        </div>
+    </div>
 </div>
-
-<ul class="pagination pagination-lg">
-  <li ng-repeat="page in pages"><button ng-click="goToPage(page)">{{ page + 1 }}</button></li>
-</ul>

@@ -221,6 +221,7 @@
 
 .inputProfile {
     margin-left: 20px;
+
 }
 
 .tableProfile td {
@@ -237,6 +238,26 @@
 }
 
 
+/*List Trail*/
+
+.imgTrail {
+    float: left;
+    width: 92px;
+    margin-right: 10px;
+}
+.tabList{
+  margin-bottom: 20px;
+}
+.listTrail {
+  width: 100%;
+  background-color: rgba(170, 174, 24, 0.5);
+  border: solid;
+  border-color: #106a75;
+  border-width: 1px;
+  border-radius: 6px;
+  padding: 5px;
+  margin-bottom: 10px;
+}
 /* TODO à améliorer */
 
 button:disabled {
