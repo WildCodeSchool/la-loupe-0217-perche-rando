@@ -274,6 +274,13 @@
     margin-bottom: 4px;
     margin-top: -10px;
 }
+.formWeather {
+  margin-bottom: 10px;
+}
+.inputCityWeather {
+      margin-top: -3px;
+}
+
 /* TODO à améliorer */
 
 button:disabled {

@@ -48,9 +48,9 @@ angular.module('app')
 
         $scope.consultWeather = function() {
             console.log($scope.cityWeather);
-
             WeatherService.getWeather($scope.cityWeather).then(function(res) {
                 console.log('Weather', res);
+                $scope.cityWeatherList = res.data.city.name;
                 $scope.weather = res.data.list.filter(function(weather) {
                     return weather.dt_txt.substring(11) === '12:00:00';
                 });
@@ -58,6 +58,10 @@ angular.module('app')
             }, function(err) {
                 console.log('OpenWeatherMapError', err);
             });
+        };
+        $scope.changeDate = function(date) {
+            date = date.substring(0, 10).split("-").reverse().join("-");
+            return date;
         };
 
 
