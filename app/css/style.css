@@ -37,7 +37,7 @@
     padding: 6px;
     background-color: #aaae18;
     border-color: #aaae18;
-    font-style: 'Salsa-Regular';
+    font-style: 'Francois One';
 }
 
 .home .btn:active {
@@ -59,7 +59,7 @@
     padding: 2px;
     text-align: center;
     margin-left: 2px;
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     color: white;
     margin-right: 6px;
     width: 18%;
@@ -156,7 +156,7 @@
 }
 
 .commentDate {
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     font-size: 1em;
     margin-top: -3%;
     color: #f6a327;
@@ -170,7 +170,7 @@
     border-color: #6B6E11;
     padding: 2%;
     margin-left: 2px;
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     color: white;
     margin-right: 6px;
     width: 100%;
@@ -192,7 +192,7 @@
     padding: 6px;
     background-color: #aaae18;
     border-color: #aaae18;
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     font-size: 1em;
     color: #f6a327;
     text-shadow: 0.1em 0.1em 0px #6B6E11;
@@ -268,7 +268,7 @@
 }
 
 .dateTrailList {
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     color: white;
     font-size: 1em;
     margin-bottom: 4px;
