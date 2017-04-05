@@ -83,9 +83,15 @@ const buildQueryWithFilters = (req) => {
     }, {
         "$addFields": {
             "average": {
-                "$ifNull": [{
-                    "$avg": "$notes.note"
-                }, -1]
+                "$min": [{
+                    "$ifNull": [{
+                        "$add": [{
+                            "$floor": {
+                                "$avg": "$notes.note"
+                            }
+                        }, 1]
+                    }, -1]
+                }, 5]
             },
         }
     }, {
