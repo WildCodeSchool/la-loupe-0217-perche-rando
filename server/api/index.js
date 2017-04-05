@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import db from './db';
 import api from './api';
+import path from 'path';
 
 var app = express();
 app.server = http.createServer(app);
@@ -24,6 +25,7 @@ app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 }));
 app.use(methodOverride('X-HTTP-Method-Override'));
+app.use('/img', express.static(path.join(__dirname, 'public/img')));
 
 db(() => {
     app.use('/', api(app));

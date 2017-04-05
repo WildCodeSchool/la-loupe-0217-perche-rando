@@ -37,6 +37,9 @@ const trailSchema = new mongoose.Schema({
     nodes: {
         type: mongoose.Schema.Types.LineString,
         required: true
+    },
+    date: {
+        type: Date
     }
 });
 
@@ -195,7 +198,7 @@ export default class Trail {
     create(req, res) {
         let trail = req.body;
         trail = operationOnTrails.process(trail);
-
+        trail.date = new Date().toISOString();
         commune.findOrCreateByName(trail.commune,
             (err, commune) => {
                 trail.commune = commune._id;
