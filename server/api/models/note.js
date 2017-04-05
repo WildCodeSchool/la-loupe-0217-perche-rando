@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import trail from './trail.js';
 import user from './user.js';
-import findOrCreate from 'mongoose-findorcreate';
 
 
 const noteSchema = new mongoose.Schema({
@@ -21,23 +20,53 @@ const noteSchema = new mongoose.Schema({
         ref: 'Trail'
     }
 });
-noteSchema.plugin(findOrCreate);
 
 let model = mongoose.model('Note', noteSchema);
 
 export default class Note {
-    // TODO add functions here
-    addNote(req, res) {
-        model.findOrCreate({
-            user,
-            trail
-        }, (err, note) => {
+
+    createOrUpdate(req, res) {
+        model.update({
+            user: req.params.userId,
+            trail: req.params.trailId
+        }, {
+            user: req.params.userId,
+            trail: req.params.trailId,
+            note: req.body.note
+        }, {
+            upsert: true
+        }).exec((err, note) => {
             if (err || !note) {
                 res.sendStatus(403);
             } else {
                 res.json({
-                    success:"true",
+                    success: "true",
                     note
+                });
+            }
+        });
+    }
+
+    averageOfTrail(req, res) {
+        console.log('Received request for the average rating of', req.params.trailId);
+        model.aggregate([{
+            $match: {
+                trail: new mongoose.Types.ObjectId(req.params.trailId)
+            }
+        }, {
+            $group: {
+                "_id": null,
+                "average": {
+                    "$avg": "$note"
+                }
+            }
+        }], (err, averages) => {
+            console.log('average', averages);
+            if (err || averages === undefined) {
+                res.sendStatus(403);
+            } else {
+                res.json({
+                    average:averages[0].average
                 });
             }
         });

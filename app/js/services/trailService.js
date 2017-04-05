@@ -5,6 +5,7 @@ angular.module('app')
     .service('TrailService', function($http) {
         return {
             getList: function(filters, limit, offset) {
+                filters = JSON.parse(JSON.stringify(filters)); // Copies the filters object. Otherwise the getCount method ends up sending the wrong params
                 if (limit !== undefined) {
                     filters.limit = limit;
                 }

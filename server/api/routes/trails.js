@@ -16,6 +16,5 @@ module.exports = (app) => {
 
     router.post('/', Auth.hasAuthorization, trail.create);
 
-    // TODO add delete route and eventually an update one
     app.use('/trails', router);
 };

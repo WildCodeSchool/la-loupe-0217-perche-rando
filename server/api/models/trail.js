@@ -6,6 +6,7 @@ import operationOnTrails from '../lib/operation-on-trails.js';
 import imageDownloader from '../lib/download-image.js';
 
 let commune = new Commune();
+let note = new Note();
 
 const trailSchema = new mongoose.Schema({
     zoom: {
@@ -25,10 +26,6 @@ const trailSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    notes: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Note'
-    }],
     name: {
         type: String,
         default: "Circuit"
@@ -52,75 +49,117 @@ const buildQueryWithFilters = (req) => {
 
     console.log('URL', req.originalUrl);
     console.log('Get Params:', req.query);
-    let query = {};
-    let limit = Number(req.query.limit) || 10;
-    let offset = Number(req.query.offset);
+    let match = {};
+    let limit = Number(req.query.limit);
+    let skip = Number(req.query.offset);
 
     if (req.query.commune) {
-        query.commune = req.query.commune;
+        match.commune = mongoose.Types.ObjectId(req.query.commune);
     }
     if (req.query.distance) {
         let distance = JSON.parse(req.query.distance);
-        query.distance = {
+        match.distance = {
             $gte: distance[0],
             $lte: distance[1]
         };
     }
+    if (req.query.note) {
+        let note = JSON.parse(req.query.note);
+        match.average = {
+            $gt: note[0],
+            $lte: note[1]
+        };
+    }
 
-    console.log('query', query, '| limit', limit, '| offset', offset);
+    console.log('match', match, '| limit', limit, '| offset', skip);
+    let query = [{
+        "$lookup": {
+            "from": "notes",
+            "localField": "_id",
+            "foreignField": "trail",
+            "as": "notes"
+        }
+    }, {
+        "$addFields": {
+            "average": {
+                "$ifNull": [{
+                    "$avg": "$notes.note"
+                }, -1]
+            },
+        }
+    }, {
+        "$match": match
+    }];
+
+    if (!isNaN(limit)) {
+        query.push({
+            "$limit": limit + skip
+        });
+    }
+
+    if (!isNaN(skip)) {
+        query.push({
+            "$skip": skip
+        });
+    }
+
+    query.concat([{
+        "$lookup": {
+            "from": "communes",
+            "localField": "commune",
+            "foreignField": "_id",
+            "as": "commune"
+        }
+    }, {
+        "$lookup": {
+            "from": "users",
+            "localField": "author",
+            "foreignField": "_id",
+            "as": "author"
+        }
+    }, {
+        "$addFields": {
+            "author": {
+                "$arrayElemAt": ["$author", 0]
+            },
+            "commune": {
+                "$arrayElemAt": ["$commune", 0]
+            }
+        }
+    }, {
+        "$project": {
+            "author.password": 0,
+            "_v": 0,
+            "isAdmin": 0
+        }
+    }]);
     return query;
 };
-
 
 export default class Trail {
 
     findAll(req, res) {
         let query = buildQueryWithFilters(req);
-        let limit = Number(req.query.limit) || 10;
-        let offset = Number(req.query.offset);
-        let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
-        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
 
-
-        model.find(query)
-            .populate('commune')
-            .populate('author')
-            .populate('notes')
-            .limit(limit)
-            .skip(offset)
-            .exec((err, trails) => {
-                if (err) {
-                    console.log(err);
-                    res.sendStatus(403).send({
-                        err
+        model.aggregate(query, (err, trails) => {
+            if (err) {
+                console.log(err);
+                res.status(500).send({
+                    err
+                });
+            } else {
+                console.log(trails.length, 'trails found');
+                if (trails) {
+                    res.json({
+                        trails: trails
                     });
                 } else {
-                    console.log(trails.length, 'trails found before filtering');
-                    if (trails) {
-                        // if (req.query.note) {
-                        //     trails = trails.filter(trail => {
-                        //         if (noteMin === -2 && noteMax === -1) {
-                        //             return trail.notes.length === 0;
-                        //         }
-                        //
-                                // let avg = trail.notes.reduce((sum, note) => {
-                        //             return sum + note.note;
-                        //         }, 0) / trail.notes.length;
-                        //         console.log('average :', avg);
-                        //         return noteMin < avg && avg <= noteMax;
-                        //     });
-                        // }
-                        // console.log(trails, 'trails found after filtering');
-                        res.json({
-                            trails: trails
-                        });
-                    } else {
-                        res.json({
-                            message: 'No trails found'
-                        });
-                    }
+                    res.json({
+                        message: 'No trails found'
+                    });
                 }
-            });
+            }
+        });
     }
 
     findById(req, res) {
@@ -138,20 +177,17 @@ export default class Trail {
 
     count(req, res) {
         let query = buildQueryWithFilters(req);
-        let limit = Number(req.query.limit) || 10;
-        let offset = Number(req.query.offset);
-        let noteMin = req.query.note !== undefined ? req.query.note[0] : -2;
-        let noteMax = req.query.note !== undefined ? req.query.note[1] :  5;
 
-        model.count(query, (err, count) => {
-            console.log('COUNT', count);
-            if (err || count === undefined || count === null) {
-                res.sendStatus(403);
+        model.aggregate(query, (err, trails) => {
+            if (err || trails === undefined) {
+                res.status(500).send({
+                    err
+                });
             } else {
-                let pages = Math.ceil(count / req.params.trailsPerPages);
-                console.log(count, 'trails founds | this gives us:', pages);
+                let length = trails.length;
+                let pages = Math.ceil(length / req.params.trailsPerPages);
                 res.json({
-                    total: count,
+                    total: length,
                     pages: pages,
                     trailsPerPages: req.params.trailsPerPages
                 });
@@ -159,7 +195,6 @@ export default class Trail {
         });
     }
 
-    // TODO include the bits about the image url
     create(req, res) {
         let trail = req.body;
         trail = operationOnTrails.process(trail);
