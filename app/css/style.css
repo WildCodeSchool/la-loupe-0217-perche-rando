@@ -221,7 +221,6 @@
 
 .inputProfile {
     margin-left: 20px;
-
 }
 
 .tableProfile td {
@@ -242,22 +241,42 @@
 
 .imgTrail {
     float: left;
-    width: 92px;
+    width: 98px;
+    border-radius: 6px;
     margin-right: 10px;
 }
-.tabList{
-  margin-bottom: 20px;
+
+.tabList {
+    margin-bottom: 20px;
 }
+
 .listTrail {
-  width: 100%;
-  background-color: rgba(170, 174, 24, 0.5);
-  border: solid;
-  border-color: #106a75;
-  border-width: 1px;
-  border-radius: 6px;
-  padding: 5px;
-  margin-bottom: 10px;
+    width: 90%;
+    height: 110px;
+    background-color: rgba(170, 174, 24, 0.5);
+    border: solid;
+    border-color: #6B6E11;
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
+
+.imgGravatarlist {
+    width: 16px;
+    margin-bottom: 1%;
+    margin-right: 1%;
+}
+
+.dateTrailList {
+    font-family: 'Salsa-Regular';
+    color: white;
+    font-size: 1em;
+    margin-bottom: 4px;
+    margin-top: -10px;
+}
+
+
 /* TODO à améliorer */
 
 button:disabled {

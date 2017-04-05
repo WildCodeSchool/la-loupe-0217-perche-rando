@@ -32,9 +32,9 @@
                 <div ng-repeat='trail in trails'>
                     <div class="listTrail">
                         <img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="">
-                        <p class="titleColright">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</p>
-                        <p>Par {{ trail.author.firstname}} {{ trail.author.lastname }}</p>
-                        <p>Le {{trail.date | date : longDate}}.</p>
+                        <h3 class="subHeaderColright">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3>
+                        <p class="dateTrailList">Circuit créé le {{trail.date | date : longDate}}.</p>
+                        <h5 class="subHeaderColright"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Par {{ trail.author.firstname}} {{ trail.author.lastname }}</h5>
                     </div>
                 </div>
 
