@@ -13,11 +13,11 @@
                       <option value="[41, 9999]">Plus de 41 km</option>
                     </select>
 
-                    <select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control" >
+                    <select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control">
                         <option selected value="">Toutes les communes</option>
                     </select>
 
-                    <select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control" >
+                    <select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control">
                         <option selected value="">Toutes les notes</option>
                         <option value="[-2, -1]">Sans note</option>
                         <option value="[-1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
@@ -31,9 +31,9 @@
                 <div ng-repeat='trail in trails'>
                     <div class="listTrail">
                         <img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="">
-                        <h3 class="subHeaderColright">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3>
-                        <p class="dateTrailList">Circuit créé le {{trail.date | date : longDate}}.</p>
-                        <h5 class="subHeaderColright"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Par {{ trail.author.firstname}} {{ trail.author.lastname }}</h5>
+                        <h3 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3>
+                        <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}} {{ trail.author.lastname }}</h5>
+                        <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span><jk-rating-stars class= "stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars></p>
                     </div>
                 </div>
 
@@ -44,12 +44,33 @@
         </div>
         <div class="col-md-5 coldroite">
             <div class='blocColRight'>
-                <div class="top-10">
+                <div class="row top-10">
                         <ol class="list">
                             <li ng-repeat="trail in top10">
                                 {{trail.comune.name}} - {{trail.distance.toFixed(2)}} km - <jk-rating-stars rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
                             </li>
                         </ol>
+                <div class="row">
+
+                    <div class="col-xs-12">
+                        <div>
+                            <h2 class='titleColright'>La météo à cinq jours</h2>
+                            <h4 class="subHeaderColright">à {{cityWeatherList}}</h4>
+                        </div>
+                        <div class="formWeather">
+                            <form ng-submit="consultWeather()">
+                                <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
+                                <button type="submit" class=" inputCityWeather postComment btn  btn-xs">Afficher</button>
+                            </form>
+                        </div>
+                        <div ng-repeat='meteo in weather' class='weather'>
+                            <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
+                            <p class="temp">{{meteo.main.temp}}°C</p>
+                            <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
+                            <p class="meteoDescription">{{meteo.weather[0].description}}</p>
+                            <p class="wind"> <img class="iconWind" src="/wind2.png" alt=""> {{meteo.wind.speed}} km/h</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

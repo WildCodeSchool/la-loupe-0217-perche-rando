@@ -2,7 +2,7 @@
  * Correspond à la liste des circuits
  */
 angular.module('app')
-    .controller('ListController', function($scope, TrailService, CommuneService) {
+    .controller('ListController', function($scope, TrailService, CommuneService, WeatherService) {
         const TRAIL_PER_PAGES = 10;
         $scope.cities = [];
         $scope.filters = {};
@@ -10,13 +10,13 @@ angular.module('app')
         $scope.top10 = [];
 
         function getCount(filters, trailsPerPages) {
-            console.log('filters',filters);
-            console.log('limit',trailsPerPages);
+            console.log('filters', filters);
+            console.log('limit', trailsPerPages);
 
-            TrailService.getCount(filters, trailsPerPages).then(function(res){
+            TrailService.getCount(filters, trailsPerPages).then(function(res) {
                 $scope.count = res.data;
                 $scope.pages = [];
-                for(var i = 0; i < $scope.count.pages; i++) {
+                for (var i = 0; i < $scope.count.pages; i++) {
                     $scope.pages.push(i);
                 }
                 console.log('Count', $scope.count);
@@ -43,7 +43,7 @@ angular.module('app')
         CommuneService.getAll().then(function(res) {
             $scope.cities = res.data;
             console.log('cities', $scope.cities);
-          });
+        });
 
         TrailService.getTop10().then(function(res) {
             console.log('res top 10', res);
@@ -53,4 +53,24 @@ angular.module('app')
         });
 
         getList($scope.filters, TRAIL_PER_PAGES, 0);
+
+        $scope.consultWeather = function() {
+            console.log($scope.cityWeather);
+            WeatherService.getWeather($scope.cityWeather).then(function(res) {
+                console.log('Weather', res);
+                $scope.cityWeatherList = res.data.city.name;
+                $scope.weather = res.data.list.filter(function(weather) {
+                    return weather.dt_txt.substring(11) === '12:00:00';
+                });
+                console.log('weather filter', $scope.weather);
+            }, function(err) {
+                console.log('OpenWeatherMapError', err);
+            });
+        };
+        $scope.changeDate = function(date) {
+            date = date.substring(0, 10).split("-").reverse().join("-");
+            return date;
+        };
+
+
     });

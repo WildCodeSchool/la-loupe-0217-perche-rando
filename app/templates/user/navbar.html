@@ -17,8 +17,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                <li ui-sref-active="active"><a ui-sref="anon.home">Website</a></li>
+                    <li ui-sref-active="active"><a ui-sref="anon.home">Website</a></li>
                     <li><a ng-click="logout()" ng-show="auth.isAuthenticated()" href='#'>Logout</a></li>
+                    <li><img class="imgNavbarGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon"> {{user.firstname}} {{user.lastname}}</li>
                 </li>
             </ul>
         </div>

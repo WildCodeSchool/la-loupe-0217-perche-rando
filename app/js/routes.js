@@ -40,7 +40,7 @@ angular.module('app')
                     }
                 }
             });
-            
+
         $stateProvider
             .state('user', {
                 abstract: true,
@@ -91,7 +91,7 @@ angular.module('app')
                     }
                 }
             })
-            .state('user.list-trail ', { // Un circuit à afficher
+            .state('user.list-trail', { // Un circuit à afficher
                 url: '/list-trail',
                 views: {
                     'content@': {
