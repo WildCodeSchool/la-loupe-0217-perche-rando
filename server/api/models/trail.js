@@ -41,8 +41,8 @@ const trailSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.LineString,
         required: true
     },
-    previewUrl: {
-        type: String
+    date: {
+        type: Date
     }
 });
 
@@ -162,10 +162,8 @@ export default class Trail {
     // TODO include the bits about the image url
     create(req, res) {
         let trail = req.body;
-
-        // trail.previewUrl = 'img/default.png';
         trail = operationOnTrails.process(trail);
-
+        trail.date = new Date().toISOString();
         commune.findOrCreateByName(trail.commune,
             (err, commune) => {
                 trail.commune = commune._id;
