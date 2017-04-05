@@ -53,7 +53,7 @@ export default class Note {
             $match: {
                 trail: new mongoose.Types.ObjectId(req.params.trailId)
             }
-        }, {
+        },{
             $group: {
                 "_id": null,
                 "average": {
@@ -61,13 +61,20 @@ export default class Note {
                 }
             }
         }], (err, averages) => {
-            console.log('average', averages);
-            if (err || averages === undefined) {
+            console.log('averages', averages);
+            if (err) {
                 res.sendStatus(403);
             } else {
-                res.json({
-                    average:averages[0].average
-                });
+                if (averages.length > 0) {
+                    let average = averages[0].average;
+                    res.json({
+                        average
+                    });
+                } else {
+                    res.json({
+                        average: -1
+                    });
+                }
             }
         });
     }

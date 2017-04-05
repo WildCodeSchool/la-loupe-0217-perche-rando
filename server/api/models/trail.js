@@ -63,7 +63,8 @@ const buildQueryWithFilters = (req) => {
             $lte: distance[1]
         };
     }
-    if (req.query.note) {
+    console.log('note', req.query.note);
+    if (req.query.note !== undefined && req.query.note !== "1") {
         let note = JSON.parse(req.query.note);
         match.average = {
             $gt: note[0],
