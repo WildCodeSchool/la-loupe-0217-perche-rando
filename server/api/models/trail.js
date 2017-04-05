@@ -98,12 +98,21 @@ const buildQueryWithFilters = (req) => {
         "$match": match
     }];
 
-    if (!isNaN(limit)) {
+    if (!isNaN(req.query.sort)) {
+        query.push({
+            "$sort": {
+                "average": req.query.sort
+            }
+        });
+    }
+
+    if (!isNaN(limit) && limit > 0) {
+        console.log('limit + skip', limit + skip);
         query.push({
             "$limit": limit + skip
         });
     }
-
+    
     if (!isNaN(skip)) {
         query.push({
             "$skip": skip
@@ -144,7 +153,7 @@ const buildQueryWithFilters = (req) => {
     return query;
 };
 
-export default class Trail {
+const Trail = class Trail {
 
     findAll(req, res) {
         let query = buildQueryWithFilters(req);
@@ -181,6 +190,15 @@ export default class Trail {
                     res.json(trail);
                 }
             });
+    }
+
+    top10(req, res) {
+        req.query = {
+            limit: 10,
+            offset: 0,
+            sort: -1
+        };
+        this.findAll(req, res);
     }
 
     count(req, res) {
@@ -227,4 +245,6 @@ export default class Trail {
                     });
             });
     }
-}
+};
+console.log('Trail', Trail);
+export default Trail;

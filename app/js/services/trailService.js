@@ -21,6 +21,9 @@ angular.module('app')
                     params: filters
                 });
             },
+            getTop10: function() {
+                return $http.get(`/trails/top10/`); 
+            },
             getOne: function(id) {
                 return $http.get(`/trails/${id}`);
             },

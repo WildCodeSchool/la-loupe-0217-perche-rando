@@ -7,6 +7,7 @@ angular.module('app')
         $scope.cities = [];
         $scope.filters = {};
         $scope.trails = [];
+        $scope.top10 = [];
 
         function getCount(filters, trailsPerPages) {
             console.log('filters',filters);
@@ -43,6 +44,13 @@ angular.module('app')
             $scope.cities = res.data;
             console.log('cities', $scope.cities);
           });
+
+        TrailService.getTop10().then(function(res) {
+            console.log('res top 10', res);
+            $scope.top10 = res.data.trails;
+        }, function(err) {
+            console.error('err top 10', err);
+        });
 
         getList($scope.filters, TRAIL_PER_PAGES, 0);
     });

@@ -10,6 +10,8 @@ module.exports = (app) => {
 
     router.get('/', Auth.hasAuthorization, trail.findAll);
 
+    router.get('/top10', Auth.hasAuthorization, trail.top10.bind(trail));
+
     router.get('/count/:trailsPerPages', Auth.hasAuthorization, trail.count);
 
     router.get('/:id', Auth.hasAuthorization, trail.findById);

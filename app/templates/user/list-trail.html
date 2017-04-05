@@ -44,7 +44,13 @@
         </div>
         <div class="col-md-5 coldroite">
             <div class='blocColRight'>
-
+                <div class="top-10">
+                        <ol class="list">
+                            <li ng-repeat="trail in top10">
+                                {{trail.comune.name}} - {{trail.distance.toFixed(2)}} km - <jk-rating-stars rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                            </li>
+                        </ol>
+                </div>
             </div>
         </div>
     </div>
