@@ -103,7 +103,7 @@ const buildQueryWithFilters = (req) => {
         });
     }
 
-    query.concat([{
+    query = query.concat([{
         "$lookup": {
             "from": "communes",
             "localField": "commune",
@@ -133,6 +133,7 @@ const buildQueryWithFilters = (req) => {
             "isAdmin": 0
         }
     }]);
+    console.log('query', query);
     return query;
 };
 
