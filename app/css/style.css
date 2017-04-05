@@ -9,13 +9,32 @@
 }
 
 
+/*navbar*/
+
+.navbar {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+}
+
+.nav {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+}
+
+.imgNavbarGravatar {
+    width: 25px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+}
+
+
 /*Home*/
 
 .couv {
     background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
-    height: 500px;
+    height: 400px;
     margin-top: -23px;
 }
 
@@ -26,11 +45,13 @@
 
 .home h1 {
     font-size: 8em;
-}
+    margin-left: 25px;
+        margin-top: 25px;}
 
 .home p {
     font-size: 2.3em;
     margin-bottom: 2em;
+      margin-left: 30px;
 }
 
 .home .btn {
@@ -45,6 +66,20 @@
     border-color: #f6a327;
 }
 
+
+/*Login*/
+
+.formLogin {
+    margin-top: 200px;
+}
+
+.btnLogin {
+    background-color: #aaae18;
+    border-color: #6B6E11;
+}
+.form-control:focus {
+    border-color: #aaae18;
+  }
 
 /*météo*/
 
@@ -236,6 +271,7 @@
     margin-top: 10px;
 }
 
+
 /*List Trail*/
 
 .imgTrail {
@@ -271,20 +307,56 @@
     font-family: 'Francois One';
     color: white;
     font-size: 1em;
-    margin-bottom: 4px;
+    margin-bottom: 13px;
     margin-top: -10px;
 }
+
 .formWeather {
-  margin-bottom: 10px;
-}
-.inputCityWeather {
-      margin-top: -3px;
+    margin-bottom: 10px;
 }
 
+.inputCityWeather {
+    margin-top: -3px;
+}
+.stars .material-icons {
+font-size: 20px !important;
+
+}
+.stars {
+  display: inline-block;
+  margin-top: 2px;
+      vertical-align: -5px;
+}
+.noteMoyenne {
+padding-top: 3px;
+}
+.starslList {
+    font-family: 'Francois One';
+    color: white;
+    font-size: 1em;
+    margin-bottom: 13px;
+    margin-top: -10px;
+}
+.HeaderList {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 2px;
+}
 /* TODO à améliorer */
 
 button:disabled {
     background-color: lightgrey;
     color: black;
     opacity: .75;
+}
+@media only screen and (max-width: 500px) {
+  .HeaderList {
+    font-size: 1em;
+  }
+  .stars .material-icons {
+  font-size: 15px !important;
+  }
+  .stars {
+        vertical-align: -2px;
+  }
 }
