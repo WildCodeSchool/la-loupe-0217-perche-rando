@@ -63,13 +63,16 @@ const buildQueryWithFilters = (req) => {
             $lte: distance[1]
         };
     }
-    console.log('note', req.query.note);
     if (req.query.note) {
         let note = JSON.parse(req.query.note);
         match.average = {
             $gt: note[0],
             $lte: note[1]
         };
+    }
+
+    if(req.query.author) {
+        match.author =  mongoose.Types.ObjectId(req.query.author);
     }
 
     console.log('match', match, '| limit', limit, '| offset', skip);
@@ -112,7 +115,7 @@ const buildQueryWithFilters = (req) => {
             "$limit": limit + skip
         });
     }
-    
+
     if (!isNaN(skip)) {
         query.push({
             "$skip": skip

@@ -31,7 +31,7 @@
                 <div ng-repeat='trail in trails'>
                     <div class="listTrail">
                         <a ng-href="/#!/user/trail/{{trail._id}}" ><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
-                        <h3 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3>
+                        <a ng-href="/#!/user/trail/{{trail._id}}" ><h3 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3></a>
                         <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}} {{ trail.author.lastname }}</h5>
                         <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
                             <jk-rating-stars class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
@@ -75,7 +75,7 @@
                     </div>
                     <ol class="top-10">
                         <li ng-repeat="trail in top10" class="row" ng-click="goToTrail(trail.id)">
-                            <div class="col-xs-6">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km - </div>
+                            <div class="col-xs-6">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km - <a ng-href="/#!/user/trail/{{trail._id}}">{{ trail.author.firstname}} {{ trail.author.lastname}}</a></div>
                             <jk-rating-stars class="mini stars col-xs-6" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
                         </li>
                     </ol>
