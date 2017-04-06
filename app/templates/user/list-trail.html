@@ -1,6 +1,9 @@
 <div class="container-fluid fond">
     <div class="row">
         <div class="col-md-7">
+          <div>
+              <h2 class='titleColPages'>Choisissez un circuit</h2>
+          </div>
             <div class="blocMap">
                 <form class="form-inline tabList" ng-submit="goToPage(0)">
                     <select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control">
@@ -48,15 +51,16 @@
 
             <div class="row blocColRight">
                 <div class="col-xs-12">
-                    <div>
-                        <h2 class='titleColright'>La météo à cinq jours</h2>
-                        <h4 class="subHeaderColright">à {{cityWeatherList}}</h4>
-                    </div>
                     <div class="formWeather">
-                        <form ng-submit="consultWeather()">
+                        <h2 class='titleColright'>Vérifiez la météo</h2>
+                    </div>
+                    <div class="">
+                        <form class="inputCityWeather" ng-submit="consultWeather()">
                             <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
-                            <button type="submit" class=" inputCityWeather postComment btn  btn-xs">Afficher</button>
+                            <button type="submit" class="btnCityWeather postComment btn  btn-xs">Afficher</button>
                         </form>
+                        <!-- <h4 class="subHeaderColright">à {{cityWeatherList}}</h4> -->
+
                     </div>
                     <div ng-repeat='meteo in weather' class='weather'>
                         <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>

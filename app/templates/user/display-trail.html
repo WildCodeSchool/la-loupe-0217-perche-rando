@@ -4,7 +4,7 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km - par {{ trail.author.firstname }} {{ trail.author.lastname }}</h2>
+                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km. <span class="authorDisplay"> par {{ trail.author.firstname }} {{ trail.author.lastname }}</span></h2>
                 </div>
                 <div>
                     <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->

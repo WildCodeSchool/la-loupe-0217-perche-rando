@@ -9,6 +9,7 @@ angular.module('app')
             'show': false
         };
         $scope.rating = 3;
+        console.log($stateParams.id);
 
         TrailService.getOne($scope.idTrail).then(function(res) {
                 $scope.trail = res.data;

@@ -151,6 +151,12 @@
     margin-bottom: 2px;
 }
 
+.authorDisplay {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    font-size: 0.5em;
+}
+
 .subHeaderColright {
     font-family: 'Francois One', sans-serif;
     color: #f6a327;
@@ -180,6 +186,7 @@
 
 .imgTrailHome {
     width: 100%;
+    margin-bottom: 10px;
 }
 
 
@@ -318,16 +325,18 @@
     margin-bottom: 10px;
 }
 
-.inputCityWeather {
+.btnCityWeather {
     margin-top: -3px;
 }
 
 .stars .material-icons {
     font-size: 17px !important;
 }
+
 .stars.mini .material-icons {
     font-size: 10px !important;
 }
+
 .stars {
     display: inline-block;
     margin-top: 2px;
