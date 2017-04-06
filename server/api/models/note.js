@@ -63,10 +63,10 @@ export default class Note {
         }], (err, averages) => {
             console.log('averages', averages);
             if (err) {
-                res.sendStatus(403);
+                res.sendStatus(500);
             } else {
                 if (averages.length > 0) {
-                    let average = averages[0].average;
+                    let average = Math.min(Math.ceil(averages[0].average), 5);
                     res.json({
                         average
                     });

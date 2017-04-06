@@ -325,7 +325,9 @@
 .stars .material-icons {
     font-size: 17px !important;
 }
-
+.stars.mini .material-icons {
+    font-size: 10px !important;
+}
 .stars {
     display: inline-block;
     margin-top: 2px;

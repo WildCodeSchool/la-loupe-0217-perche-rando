@@ -63,13 +63,16 @@ const buildQueryWithFilters = (req) => {
             $lte: distance[1]
         };
     }
-    console.log('note', req.query.note);
     if (req.query.note) {
         let note = JSON.parse(req.query.note);
         match.average = {
             $gt: note[0],
             $lte: note[1]
         };
+    }
+
+    if(req.query.author) {
+        match.author =  mongoose.Types.ObjectId(req.query.author);
     }
 
     console.log('match', match, '| limit', limit, '| offset', skip);
@@ -83,16 +86,31 @@ const buildQueryWithFilters = (req) => {
     }, {
         "$addFields": {
             "average": {
-                "$ifNull": [{
-                    "$avg": "$notes.note"
-                }, -1]
+                "$min": [{
+                    "$ifNull": [{
+                        "$add": [{
+                            "$floor": {
+                                "$avg": "$notes.note"
+                            }
+                        }, 1]
+                    }, -1]
+                }, 5]
             },
         }
     }, {
         "$match": match
     }];
 
-    if (!isNaN(limit)) {
+    if (!isNaN(req.query.sort)) {
+        query.push({
+            "$sort": {
+                "average": req.query.sort
+            }
+        });
+    }
+
+    if (!isNaN(limit) && limit > 0) {
+        console.log('limit + skip', limit + skip);
         query.push({
             "$limit": limit + skip
         });
@@ -138,7 +156,7 @@ const buildQueryWithFilters = (req) => {
     return query;
 };
 
-export default class Trail {
+const Trail = class Trail {
 
     findAll(req, res) {
         let query = buildQueryWithFilters(req);
@@ -175,6 +193,15 @@ export default class Trail {
                     res.json(trail);
                 }
             });
+    }
+
+    top10(req, res) {
+        req.query = {
+            limit: 10,
+            offset: 0,
+            sort: -1
+        };
+        this.findAll(req, res);
     }
 
     count(req, res) {
@@ -221,4 +248,6 @@ export default class Trail {
                     });
             });
     }
-}
+};
+console.log('Trail', Trail);
+export default Trail;

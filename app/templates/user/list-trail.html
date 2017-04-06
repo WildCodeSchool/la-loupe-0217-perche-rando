@@ -30,10 +30,12 @@
 
                 <div ng-repeat='trail in trails'>
                     <div class="listTrail">
-                        <img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="">
-                        <h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4>
-                        <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
-                        <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span><jk-rating-stars class= "stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars></p>
+                        <a ng-href="/#!/user/trail/{{trail._id}}" ><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
+                        <a ng-href="/#!/user/trail/{{trail._id}}" ><h3 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h3></a>
+                        <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}} {{ trail.author.lastname }}</h5>
+                        <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
+                            <jk-rating-stars class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                        </p>
                     </div>
                 </div>
 
@@ -43,29 +45,42 @@
             </div>
         </div>
         <div class="col-md-5 coldroite">
-            <div class='blocColRight'>
-                <div class="row">
 
-                    <div class="col-xs-12">
-                        <div>
-                            <h2 class='titleColright'>La météo à cinq jours</h2>
-                            <h4 class="subHeaderColright">à {{cityWeatherList}}</h4>
-                        </div>
-                        <div class="formWeather">
-                            <form ng-submit="consultWeather()">
-                                <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
-                                <button type="submit" class=" inputCityWeather postComment btn  btn-xs">Afficher</button>
-                            </form>
-                        </div>
-                        <div ng-repeat='meteo in weather' class='weather'>
-                            <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
-                            <p class="temp">{{meteo.main.temp}}°C</p>
-                            <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
-                            <p class="meteoDescription">{{meteo.weather[0].description}}</p>
-                            <p class="wind"> <img class="iconWind" src="/wind2.png" alt=""> {{meteo.wind.speed}} km/h</p>
-                        </div>
+            <div class="row blocColRight">
+                <div class="col-xs-12">
+                    <div>
+                        <h2 class='titleColright'>La météo à cinq jours</h2>
+                        <h4 class="subHeaderColright">à {{cityWeatherList}}</h4>
+                    </div>
+                    <div class="formWeather">
+                        <form ng-submit="consultWeather()">
+                            <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
+                            <button type="submit" class=" inputCityWeather postComment btn  btn-xs">Afficher</button>
+                        </form>
+                    </div>
+                    <div ng-repeat='meteo in weather' class='weather'>
+                        <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
+                        <p class="temp">{{meteo.main.temp}}°C</p>
+                        <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
+                        <p class="meteoDescription">{{meteo.weather[0].description}}</p>
+                        <p class="wind"> <img class="iconWind" src="/wind2.png" alt=""> {{meteo.wind.speed}} km/h</p>
                     </div>
                 </div>
+            </div>
+
+            <div class="row blocColRight">
+                <div class="col-xs-12">
+                    <div>
+                        <h2 class='titleColright'>Top 10 des meilleurs circuits</h2>
+                    </div>
+                    <ol class="top-10">
+                        <li ng-repeat="trail in top10" class="row" ng-click="goToTrail(trail.id)">
+                            <div class="col-xs-6">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km - <a ng-href="/#!/user/trail/{{trail._id}}">{{ trail.author.firstname}} {{ trail.author.lastname}}</a></div>
+                            <jk-rating-stars class="mini stars col-xs-6" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                        </li>
+                    </ol>
+                </div>
+
             </div>
         </div>
     </div>
