@@ -2,7 +2,10 @@
  * Correspond à l'affichage d'un circuit
  */
 angular.module('app')
-    .controller('TrailController', function($scope, $stateParams, TrailService, NgMap, NoteService, WeatherService, CommentService, CurrentUser) {
+    .controller('TrailController', function($scope, $stateParams, $location, TrailService, NgMap, NoteService, WeatherService, CommentService, CurrentUser, Auth) {
+        $scope.url = $location.absUrl();
+        console.log($scope.url);
+        $scope.auth = Auth;
         $scope.idTrail = $stateParams.id;
         $scope.error = {
             'content': '',
