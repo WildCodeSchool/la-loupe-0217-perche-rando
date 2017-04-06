@@ -279,7 +279,7 @@
 
 .imgTrail {
     float: left;
-    width: 98px;
+    width: 75px;
     border-radius: 6px;
     margin-right: 10px;
 }
@@ -290,7 +290,7 @@
 
 .listTrail {
     width: 90%;
-    height: 110px;
+    height: 88px;
     background-color: rgba(170, 174, 24, 0.5);
     border: solid;
     border-color: #6B6E11;
@@ -323,17 +323,15 @@
 }
 
 .stars .material-icons {
-    font-size: 20px !important;
+    font-size: 17px !important;
 }
-
 .stars.mini .material-icons {
     font-size: 10px !important;
 }
-
 .stars {
     display: inline-block;
     margin-top: 2px;
-    vertical-align: -5px;
+    vertical-align: -4px;
 }
 
 .noteMoyenne {
@@ -352,7 +350,9 @@
     font-family: 'Francois One', sans-serif;
     color: #f6a327;
     margin-top: 2px;
+    margin-bottom: 15px;
 }
+
 
 /* TODO à améliorer */
 
@@ -362,14 +362,20 @@ button:disabled {
     opacity: .75;
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 650px) {
     .HeaderList {
-        font-size: 1em;
+        font-size: 1.1em;
     }
     .stars .material-icons {
-        font-size: 15px !important;
+        font-size: 17px !important;
     }
     .stars {
         vertical-align: -2px;
+    }
+    .imgTrail {
+        width: 78px;
+    }
+    .listTrail {
+        height: 90px;
     }
 }

@@ -3,7 +3,7 @@
  */
 angular.module('app')
     .controller('ListController', function($scope, TrailService, CommuneService, WeatherService) {
-        const TRAIL_PER_PAGES = 10;
+        const TRAIL_PER_PAGES = 5;
         $scope.cities = [];
         $scope.filters = {};
         $scope.trails = [];

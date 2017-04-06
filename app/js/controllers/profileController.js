@@ -7,4 +7,6 @@ angular.module('app')
         $scope.updateProfile = function() {
             UserService.update($scope.newuser._id, $scope.newuser);
         };
+
+
     });
