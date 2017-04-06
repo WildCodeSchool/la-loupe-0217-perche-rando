@@ -1,21 +1,8 @@
 <div class="container-fluid fond">
     <div class="row">
-        <div class="col-md-7">
-          <div>
-              <h2 class='titleColPages'>Vos circuits</h2>
-          </div>
-          <div ng-repeat='trail in trails'>
-              <div class="listTrail">
-                  <a ng-href="/#!/user/trail/{{trail._id}}" ><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt=""></a>
-                  <a ng-href="/#!/user/trail/{{trail._id}}" ><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
-                  <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
-                  <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span><jk-rating-stars class= "stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars></p>
-              </div>
-          </div>
 
 
-        </div>
-        <div class="col-md-5 coldroite">
+        <div class="col-md-5 col-md-push-7 coldroite">
             <div class="blocColRight">
 
                 <h1 class="titleColright">{{user.firstname}} {{user.lastname}}</h1>
@@ -41,7 +28,21 @@
                     </div>
                     <button type="submit" class="postComment btn  btn-xs">Mettre à jour</button>
                 </form>
-
+            </div>
+        </div>
+        <div class="col-md-7 col-md-pull-5">
+            <div>
+                <h2 class='titleColPages'>Vos circuits</h2>
+            </div>
+            <div ng-repeat='trail in trails'>
+                <div class="listTrail">
+                    <a ng-href="/#!/user/trail/{{trail._id}}"><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt=""></a>
+                    <a ng-href="/#!/user/trail/{{trail._id}}"><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
+                    <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
+                    <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
+                        <jk-rating-stars class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

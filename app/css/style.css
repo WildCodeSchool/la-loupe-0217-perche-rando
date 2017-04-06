@@ -27,17 +27,22 @@
     padding-bottom: 15px;
     margin-right: 5px;
 }
-.navbar-inverse .navbar-nav > .active > a {
-  font-family: 'Francois One', sans-serif;
-  color: #f6a327;
+
+.navbar-inverse .navbar-nav>.active>a {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
 }
 
 .navbar-inverse .navbar-nav>li>a {
     color: #f6a327;
 }
+
 a.ng-binding {
-  height: 64px;
-  margin: -13px;}
+    height: 64px;
+    margin: -13px;
+}
+
+
 /*Home*/
 
 .couv {
@@ -107,9 +112,29 @@ a.ng-binding {
     padding: 2px;
     text-align: center;
     margin-left: 2px;
+    margin-right: 6px;
     font-family: 'Francois One';
     color: white;
+    width: 18%;
+    background-color: rgba(170, 174, 24, 0.5);
+    position: relative;
+}
+
+.weatherList {
+    float: left;
+    height: 180px;
+    font-size: 0.8em;
+    border: solid;
+    border-radius: 6px;
+    border-width: 0.1em;
+    border-color: #6B6E11;
+    padding: 2px;
+    text-align: center;
+    margin-left: 2px;
+    margin-top: 10px;
     margin-right: 6px;
+    font-family: 'Francois One';
+    color: white;
     width: 18%;
     background-color: rgba(170, 174, 24, 0.5);
     position: relative;

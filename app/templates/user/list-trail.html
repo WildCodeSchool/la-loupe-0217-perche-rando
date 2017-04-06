@@ -1,9 +1,9 @@
 <div class="container-fluid fond">
     <div class="row">
         <div class="col-md-7">
-          <div>
-              <h2 class='titleColPages'>Choisissez un circuit</h2>
-          </div>
+            <div>
+                <h2 class='titleColPages'>Choisissez un circuit</h2>
+            </div>
             <div class="blocMap">
                 <form class="form-inline tabList" ng-submit="goToPage(0)">
                     <select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control">
@@ -33,22 +33,20 @@
 
                 <div ng-repeat='trail in trails'>
                     <div class="listTrail">
-                        <a ng-href="/#!/user/trail/{{trail._id}}" ><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
-                        <a ng-href="/#!/user/trail/{{trail._id}}" ><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
+                        <a ng-href="/#!/user/trail/{{trail._id}}"><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
+                        <a ng-href="/#!/user/trail/{{trail._id}}"><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
                         <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
                         <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
                             <jk-rating-stars class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
                         </p>
                     </div>
                 </div>
-
                 <ul class="pagination pagination-lg">
                     <li ng-repeat="page in pages"><button ng-click="goToPage(page)">{{ page + 1 }}</button></li>
                 </ul>
             </div>
         </div>
         <div class="col-md-5 coldroite">
-
             <div class="row blocColRight">
                 <div class="col-xs-12">
                     <div class="formWeather">
@@ -59,10 +57,8 @@
                             <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
                             <button type="submit" class="btnCityWeather postComment btn  btn-xs">Afficher</button>
                         </form>
-                        <!-- <h4 class="subHeaderColright">à {{cityWeatherList}}</h4> -->
-
                     </div>
-                    <div ng-repeat='meteo in weather' class='weather'>
+                    <div ng-repeat='meteo in weather' class='weatherList'>
                         <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
                         <p class="temp">{{meteo.main.temp}}°C</p>
                         <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">

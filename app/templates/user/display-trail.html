@@ -17,7 +17,7 @@
                 </div>
                 <div class="subHeaderColright">
                     <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4>
-                    Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
+                    <p ng-hide="auth.isAuthenticated()">Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars></p>
                     Moyenne : <jk-rating-stars rating="average" max-rating="5" read-only="true"></jk-rating-stars>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         <div class="col-md-5 coldroite">
             <div class='blocColRight'>
                 <div>
-                    <h2 class='titleColright'>La météo à cinq jours</h2>
+                    <h2 class='titleColright'>Vérifiez la météo</h2>
                     <h4 class="subHeaderColright">à {{Ville.name}}</h4>
                 </div>
                 <div class="row">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="blocColRight">
+            <div class="blocColRight" >
                 <h2 class='titleColright'>Commentaires</h2>
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
                     <p class="subHeaderColright"><img class="imgGravatarComment" src="http://www.gravatar.com/avatar/{{ comment.author.email | gravatar }}?d=identicon">De {{comment.author.firstname}} {{comment.author.lastname}}</p>
@@ -50,7 +50,7 @@
                     <p class="commentContent">{{comment.content}}</p>
                 </div>
 
-                <div class="">
+                <div class="" ng-hide="auth.isAuthenticated()">
                     <p class="subHeaderColright">Ajouter un commentaire</p>
                     <form class="" ng-submit="addComment()">
                         <textarea class="form-control " rows="3" ng-model="newComment.content"></textarea>

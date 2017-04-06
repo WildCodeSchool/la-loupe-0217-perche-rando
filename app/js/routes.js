@@ -130,7 +130,7 @@ angular.module('app')
                     }
                 }
             })
-            .state('user.create-trail ', { // Un circuit à afficher
+            .state('user.create-trail', { // Un circuit à afficher
                 url: '/create-trail',
                 views: {
                     'content@': {

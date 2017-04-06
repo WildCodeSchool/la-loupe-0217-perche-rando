@@ -14,6 +14,20 @@ module.exports = (app) => {
 
     router.get('/count/:trailsPerPages', Auth.hasAuthorization, trail.count);
 
+    router.get('/58e60dc6c91e932518c471c1', (req, res) => {
+        req.params.id = '58e60dc6c91e932518c471c1';
+        return trail.findById(req, res);
+    });
+
+    router.get('/58e64f05f528fc520c7241dd', (req, res) => {
+        req.params.id = '58e64f05f528fc520c7241dd';
+        return trail.findById(req, res);
+    });
+    router.get('/58e6506630118755318e4941', (req, res) => {
+        req.params.id = '58e6506630118755318e4941';
+        return trail.findById(req, res);
+    });
+
     router.get('/:id', Auth.hasAuthorization, trail.findById);
 
     router.post('/', Auth.hasAuthorization, trail.create);

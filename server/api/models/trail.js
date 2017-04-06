@@ -184,6 +184,7 @@ const Trail = class Trail {
 
     findById(req, res) {
         model.findById(req.params.id)
+        
             .populate('commune')
             .populate('author')
             .exec((err, trail) => {

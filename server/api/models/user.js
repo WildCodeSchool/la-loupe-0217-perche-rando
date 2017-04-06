@@ -134,7 +134,8 @@ export default class User {
 
     update(req, res) {
         model.update({
-            _id: req.params.id
+            _id: req.params.id,
+            
         }, req.body, (err, user) => {
             if (err || !user) {
                 res.status(500).send(err.message);
