@@ -11,13 +11,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="anon.home">Home</a></li>
+                <li ui-sref-active="active"><a class="titleNavbar" ui-sref="anon.home">Perche Rando</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <li ui-sref-active="active"><a ui-sref="anon.login" ng-hide="auth.isAuthenticated()">Login</a></li>
                     <li ui-sref-active="active"><a ui-sref="anon.register" ng-hide="auth.isAuthenticated()">Register</a></li>
-                    <li ui-sref-active="active"><a ui-sref="user.dashboard" ng-show="auth.isAuthenticated()">Dashboard</a></li>
+                    <li ui-sref-active="active"><a ui-sref="user.list-trail" ng-show="auth.isAuthenticated()">Circuits</a></li>
+                    <li ui-sref-active="active"><a ui-sref="user.profile" ng-show="auth.isAuthenticated()"><img class="imgNavbarGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon"> {{user.firstname}} {{user.lastname}}</a></li>
                     <li><a ng-click="logout()" ng-show="auth.isAuthenticated()" href='#'>Logout</a></li>
                 </li>
             </ul>

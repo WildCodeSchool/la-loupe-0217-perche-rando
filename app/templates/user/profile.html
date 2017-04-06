@@ -6,8 +6,8 @@
           </div>
           <div ng-repeat='trail in trails'>
               <div class="listTrail">
-                  <img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="">
-                  <h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4>
+                  <a ng-href="/#!/user/trail/{{trail._id}}" ><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt=""></a>
+                  <a ng-href="/#!/user/trail/{{trail._id}}" ><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
                   <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
                   <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span><jk-rating-stars class= "stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars></p>
               </div>

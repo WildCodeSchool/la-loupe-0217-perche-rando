@@ -11,7 +11,7 @@
 
 /*navbar*/
 
-.navbar {
+.navbar li {
     font-family: 'Francois One', sans-serif;
     color: #f6a327;
 }
@@ -25,9 +25,19 @@
     width: 25px;
     padding-top: 10px;
     padding-bottom: 15px;
+    margin-right: 5px;
+}
+.navbar-inverse .navbar-nav > .active > a {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
 }
 
-
+.navbar-inverse .navbar-nav>li>a {
+    color: #f6a327;
+}
+a.ng-binding {
+  height: 64px;
+  margin: -13px;}
 /*Home*/
 
 .couv {
@@ -170,14 +180,6 @@
     min-height: 800px;
     margin-top: -27px;
     border-radius: 6px;
-}
-
-#titleNavbar {
-    font-family: 'Francois One', sans-serif;
-}
-
-.navbar-inverse .navbar-nav>li>a {
-    color: #f6a327;
 }
 
 .map {

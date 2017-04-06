@@ -11,15 +11,15 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li id="titleNavbar" ui-sref-active="active"><a ui-sref="user.dashboard" ng-show="auth.isAuthenticated()">Perche Rando</a></li>
-                <li ui-sref-active="active"><a ui-sref="user.profile" ng-show="auth.isAuthenticated()">Profil</a></li>
+                <li class="titleNavbar" ui-sref-active="active"><a ui-sref="anon.home">Perche Rando</a></li>
+                <!-- <li ui-sref-active="active"><a ui-sref="user.profile" ng-show="auth.isAuthenticated()">Profil</a></li> -->
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <li ui-sref-active="active"><a ui-sref="anon.home">Website</a></li>
+                    <li ui-sref-active="active"><a ui-sref="user.list-trail">Circuits</a></li>
                     <li><a ng-click="logout()" ng-show="auth.isAuthenticated()" href='#'>Logout</a></li>
-                    <li><img class="imgNavbarGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon"> {{user.firstname}} {{user.lastname}}</li>
+                    <li ui-sref-active="active"><a ui-sref="user.profile" ng-show="auth.isAuthenticated()"><img class="imgNavbarGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon"> {{user.firstname}} {{user.lastname}}</a></li>
                 </li>
             </ul>
         </div>
