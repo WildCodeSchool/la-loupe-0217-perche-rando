@@ -133,9 +133,13 @@ export default class User {
     }
 
     update(req, res) {
+      if (req.body.password) {
+          var salt = bcrypt.genSaltSync(10);
+          req.body.password = bcrypt.hashSync(req.body.password, salt);
+      }
         model.update({
             _id: req.params.id,
-            
+
         }, req.body, (err, user) => {
             if (err || !user) {
                 res.status(500).send(err.message);
