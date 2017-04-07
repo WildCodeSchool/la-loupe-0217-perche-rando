@@ -22,7 +22,7 @@ angular.module('app')
                 });
             },
             getTop10: function() {
-                return $http.get(`/trails/top10/`); 
+                return $http.get(`/trails/top10/`);
             },
             getOne: function(id) {
                 return $http.get(`/trails/${id}`);
@@ -31,7 +31,7 @@ angular.module('app')
                 return $http.post('/trails/', trail);
             },
             delete: function(id) {
-                return $http.put('/trails/' + id);
+                return $http.delete(`/trails/${id}`);
             },
             getAllByUser: function(userId) {
                 // TODO à compléter

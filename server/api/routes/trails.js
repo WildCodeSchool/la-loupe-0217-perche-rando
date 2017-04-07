@@ -32,5 +32,7 @@ module.exports = (app) => {
 
     router.post('/', Auth.hasAuthorization, trail.create);
 
+    router.delete('/:id', Auth.hasAuthorization, Auth.isAuthor, trail.delete);
+
     app.use('/trails', router);
 };

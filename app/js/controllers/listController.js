@@ -2,12 +2,18 @@
  * Correspond à la liste des circuits
  */
 angular.module('app')
-    .controller('ListController', function($scope, TrailService, CommuneService, WeatherService) {
+    .controller('ListController', function($scope, $stateParams, TrailService, CommuneService, WeatherService) {
         const TRAIL_PER_PAGES = 5;
         $scope.cities = [];
         $scope.filters = {};
         $scope.trails = [];
         $scope.top10 = [];
+        $scope.message = $stateParams.message;
+        (function() {
+            if ($scope.message !== undefined && typeof $scope.message === 'string' && $scope.message !== "") {
+                $scope.showMessage = true;
+            }
+        })();
 
         function getCount(filters, trailsPerPages) {
             console.log('filters', filters);

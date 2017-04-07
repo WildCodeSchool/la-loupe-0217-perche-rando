@@ -31,36 +31,6 @@ angular.module('app')
                     }
                 }
             })
-            // .state('anon.exemple1', {
-            //     url: '/exemple1',
-            //     views: {
-            //         'content@': {
-            //             templateUrl: 'user/display-trail.html',
-            //             controller: 'TrailController',
-            //         }
-            //     },
-            //     params: {
-            //       id: '58e60dc6c91e932518c471c1'
-            //     }
-            // })
-            // .state('anon.exemple2', {
-            //     url: '/login',
-            //     views: {
-            //         'content@': {
-            //             templateUrl: 'anon/login.html',
-            //             controller: 'LoginController'
-            //         }
-            //     }
-            // })
-            // .state('anon.exemple3', {
-            //     url: '/login',
-            //     views: {
-            //         'content@': {
-            //             templateUrl: 'anon/login.html',
-            //             controller: 'LoginController'
-            //         }
-            //     }
-            // })
             .state('anon.register', {
                 url: '/register',
                 views: {
@@ -122,7 +92,7 @@ angular.module('app')
                 }
             })
             .state('user.list-trail', { // Un circuit à afficher
-                url: '/list-trail',
+                url: '/list-trail?message',
                 views: {
                     'content@': {
                         templateUrl: 'user/list-trail.html',

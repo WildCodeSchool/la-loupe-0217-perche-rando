@@ -2,7 +2,7 @@
  * Correspond à l'affichage d'un circuit
  */
 angular.module('app')
-    .controller('TrailController', function($scope, $stateParams, $location, TrailService, NgMap, NoteService, WeatherService, CommentService, CurrentUser, Auth) {
+    .controller('TrailController', function($scope, $window, $state, $stateParams, $location, TrailService, NgMap, NoteService, WeatherService, CommentService, CurrentUser, Auth) {
         $scope.url = $location.absUrl();
         console.log($scope.url);
         $scope.auth = Auth;
@@ -12,7 +12,7 @@ angular.module('app')
             'show': false
         };
         $scope.rating = 3;
-        console.log($stateParams.id);
+        $scope.user = CurrentUser.user();
 
         TrailService.getOne($scope.idTrail).then(function(res) {
                 $scope.trail = res.data;
@@ -101,4 +101,19 @@ angular.module('app')
             return geoJSONLineString.coordinates.map(point => [point[1], point[0]]);
         };
 
+        $scope.deleteTrail = function(id) {
+            var result  = $window.confirm("Ếtes vous sûr de vouloir supprimer ce circuit ?");
+            if (result === true) {
+                TrailService.delete(id).then(function(res) {
+                    console.log('Res deletion:', res);
+                    $state.go('user.list-trail', {"message": `Le circuit "${$scope.trail.commune.name} - ${$scope.trail.distance.toFixed(2)}km" a bien été supprimé`});
+                }, function(err) {
+                    console.error('Err deletion', err);
+                });
+            }
+        };
+
+        $scope.isAuthor = function() {
+            return $scope.trail.author._id === $scope.user._id;
+        };
     });

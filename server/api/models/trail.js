@@ -75,7 +75,6 @@ const buildQueryWithFilters = (req) => {
         match.author =  mongoose.Types.ObjectId(req.query.author);
     }
 
-    console.log('match', match, '| limit', limit, '| offset', skip);
     let query = [{
         "$lookup": {
             "from": "notes",
@@ -152,11 +151,10 @@ const buildQueryWithFilters = (req) => {
             "isAdmin": 0
         }
     }]);
-    console.log('query', query);
     return query;
 };
 
-const Trail = class Trail {
+export default class Trail {
 
     findAll(req, res) {
         let query = buildQueryWithFilters(req);
@@ -182,18 +180,23 @@ const Trail = class Trail {
         });
     }
 
+    findByIdForAuth(id, callback) {
+        model.findById(id)
+            .populate('author')
+            .exec(callback);
+    }
+
     findById(req, res) {
         model.findById(req.params.id)
-        
             .populate('commune')
             .populate('author')
             .exec((err, trail) => {
-                if (err || !trail) {
-                    res.sendStatus(403);
-                } else {
-                    res.json(trail);
-                }
-            });
+               if (err || !trail) {
+                   res.sendStatus(403);
+               } else {
+                   res.json(trail);
+               }
+           });
     }
 
     top10(req, res) {
@@ -249,6 +252,20 @@ const Trail = class Trail {
                     });
             });
     }
-};
-console.log('Trail', Trail);
-export default Trail;
+
+    delete(req, res) {
+        model.findById(req.params.id)
+            .remove((err) =>{
+                if (err) {
+                    res.status(500).send({
+                        err
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        delete: req.params.id
+                    });
+                }
+            });
+    }
+}
