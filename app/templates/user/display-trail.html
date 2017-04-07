@@ -4,7 +4,8 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km.<span class="authorTrail">&nbsp;&nbsp;par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</h2>
+                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km.<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
                 <div>
                     <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->
@@ -14,7 +15,7 @@
                             </shape>
                         </ng-map>
                     </div>
-                </div>
+                </div>it 
                 <div class="subHeaderColright">
                     <a href=""
                     socialshare socialshare-provider="facebook"
@@ -31,7 +32,6 @@
                     socialshare-hashtags="Perche, Randonnée"
                     socialshare-url="http://www.percherando.com">
                     <img class="iconTW" src="/tweet-button.png" alt=""></a>
-                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
 
                     <h3><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3>
                     Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
