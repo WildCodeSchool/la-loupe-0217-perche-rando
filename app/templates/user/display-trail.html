@@ -4,7 +4,8 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km.<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <h2 class='titleColPages'>{{Ville.name}}<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <h3 class='subtitletrail'> <img class="iconDistance" src="/distance.png" alt="">  - {{trail.distance.toFixed(2)}}km.&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3>
                     <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
                 <div>
@@ -33,7 +34,7 @@
                     socialshare-url="http://www.percherando.com">
                     <img class="iconTW" src="/tweet-button.png" alt=""></a>
 
-                    <h3><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3>
+
                     <p ng-show="auth.isAuthenticated()">Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars></p>
                     Moyenne : <jk-rating-stars ng-if="average !== -1" rating="average" max-rating="5" read-only="true"></jk-rating-stars>
                             <span class="unrated" ng-if="average === -1">

@@ -49,7 +49,7 @@ a.ng-binding {
     background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
-    height: 400px;
+    height: 470px;
     margin-top: -23px;
 }
 
@@ -179,6 +179,17 @@ a.ng-binding {
     margin-top: 33px;
 }
 
+.subtitleColPages {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 33px;
+}
+.subtitletrail {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 10px;
+}
+
 .titleColright {
     font-family: 'Francois One', sans-serif;
     color: #f6a327;
@@ -207,6 +218,11 @@ a.ng-binding {
     border-radius: 6px;
 }
 
+.iconDistance {
+    width: 6%;
+    vertical-align: 0px;
+}
+
 .map {
     margin-top: 1.1em;
 }
@@ -226,22 +242,26 @@ a.ng-binding {
 }
 
 .btnDelete {
-  width: 65px;
+    width: 65px;
     height: 26px;
     padding: 4px;
     background-color: #e73664;
     border-bottom-color: #8a0d2d;
     color: white;
 }
+
 .authorTrail {
-  font-size: 0.6em;
+    font-size: 0.6em;
 }
+
 .glyphicon-time {
-  margin-top: 20px;
+    margin-top: 20px;
 }
+
 .authorTrail {
-font-size: 0.5em;
+    font-size: 0.5em;
 }
+
 
 /*Comments*/
 
@@ -395,9 +415,11 @@ font-size: 0.5em;
     margin-top: 2px;
     vertical-align: -4px;
 }
+
 .button .material-icons {
-  color: #e73664;
+    color: #e73664;
 }
+
 .noteMoyenne {
     padding-top: 3px;
 }
@@ -416,9 +438,11 @@ font-size: 0.5em;
     margin-top: 2px;
     margin-bottom: 15px;
 }
+
 .listTop10 {
-  margin-top: 10px;
+    margin-top: 10px;
 }
+
 
 /* TODO à améliorer */
 
