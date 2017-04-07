@@ -19,7 +19,11 @@
                     <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btn-default" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
                     <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4>
                     Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
-                    Moyenne : <jk-rating-stars rating="average" max-rating="5" read-only="true"></jk-rating-stars>
+                            Moyenne : <jk-rating-stars ng-if="average !== -1" rating="average" max-rating="5" read-only="true"></jk-rating-stars>
+                            <span class="unrated" ng-if="average === -1">
+                                Non noté
+                            </span>
+
                 </div>
             </div>
         </div>

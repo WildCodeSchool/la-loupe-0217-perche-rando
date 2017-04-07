@@ -4,6 +4,7 @@
 @transparent-green: rgba(170, 174, 24, 0.5);
 @green: rgba(170, 174, 24, 1);
 @white: white;
+@orange: #f6a327;
 
 .top-10 {
     color: white;
@@ -47,7 +48,19 @@
                 transition-property: all;
                 transition-duration: 0.5s;
                 transition-timing-function: ease-in;
+
+                img {
+                    margin-bottom: 0.6em;
+                }
             }
         }
+    }
+}
+
+.unrated {
+    color: @orange;
+
+    &.mini {
+        font-size: 0.75em;
     }
 }
