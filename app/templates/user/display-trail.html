@@ -4,12 +4,14 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km - par {{ trail.author.firstname }} {{ trail.author.lastname }}</h2>
+                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km.<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
+
                 </div>
                 <div>
                     <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->
                     <div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
-                        <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 25em; width: 98%">
+                        <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 35em; width: 98%">
                             <shape name="polyline" id="foo" path="{{toGmapsCoordinates(trail.nodes)}}" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="3">
                             </shape>
                         </ng-map>
@@ -31,7 +33,6 @@
                     socialshare-hashtags="Perche, Randonnée"
                     socialshare-url="http://www.percherando.com">
                     <img class="iconTW" src="/tweet-button.png" alt=""></a>
-                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
 
                     <h3><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3> Votre note :
                     <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>

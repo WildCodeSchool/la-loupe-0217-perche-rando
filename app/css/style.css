@@ -232,13 +232,14 @@ a.ng-binding {
     background-color: #e73664;
     border-bottom-color: #8a0d2d;
     color: white;
-    margin-left: 362px;
 }
 
 .glyphicon-time {
   margin-top: 20px;
 }
-
+.authorTrail {
+font-size: 0.5em;
+}
 
 /*Comments*/
 
