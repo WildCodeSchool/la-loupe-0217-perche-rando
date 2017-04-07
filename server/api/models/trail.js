@@ -98,10 +98,16 @@ const buildQueryWithFilters = (req) => {
     if (!isNaN(req.query.sort)) {
         query.push({
             "$sort": {
-                "average": req.query.sort
+                "average": req.query.sort,
             }
         });
     }
+
+    query.push({
+      "$sort": {
+        "date" : -1
+      }
+    });
 
     if (!isNaN(limit) && limit > 0) {
         console.log('limit + skip', limit + skip);

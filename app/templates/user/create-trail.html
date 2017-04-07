@@ -28,11 +28,11 @@
                 <div>
                     <form ng-submit="createTrail()">
                         <input required ng-model="commune" placeholder="Commune de départ" />
-                        <button ng-disabled="!(trail.nodes.length > 0)" type="submit">Créer Circuit</button>
+                        <button class="postComment btn btn-xs" ng-disabled="!(trail.nodes.length > 0)" type="submit">Créer Circuit</button>
                     </form>
                 </div>
                 <div ng-if="trailCreated._id !== undefined" class='blocColRight'>
-                    <a ng-href="/#!/user/trail/{{trailCreated._id}}" class="btn btn-info" role="button">Cliquez ici pour acceder à votre circuit</a>
+                    <a ng-href="/#!/user/trail/{{trailCreated._id}}" class="postComment btn btn-xs" role="button">Cliquez ici pour acceder à votre circuit</a>
                 </div>
             </div>
         </div>

@@ -387,7 +387,7 @@ font-size: 0.5em;
 }
 
 .stars.mini .material-icons {
-    font-size: 10px !important;
+    font-size: 9px !important;
 }
 
 .stars {
@@ -416,7 +416,9 @@ font-size: 0.5em;
     margin-top: 2px;
     margin-bottom: 15px;
 }
-
+.listTop10 {
+  margin-top: 10px;
+}
 
 /* TODO à améliorer */
 

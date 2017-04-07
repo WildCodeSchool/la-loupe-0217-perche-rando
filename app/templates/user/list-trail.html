@@ -35,7 +35,7 @@
                     </select>
                 </form>
 
-                <div ng-repeat='trail in trails'>
+                <div ng-repeat='trail in trails | orderBy : $index'>
                     <div class="listTrail">
                         <a ng-href="/#!/user/trail/{{trail._id}}"><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
                         <a ng-href="/#!/user/trail/{{trail._id}}"><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
@@ -80,22 +80,23 @@
                     <div>
                         <h2 class='titleColright'>Top 10 des meilleurs circuits</h2>
                     </div>
-                    <div ng-repeat="trail in top10" class="row trail">
-                        <a class="col-sm-9 col-xs-12 info text-center" ng-href="/#!/user/trail/{{trail._id}}">
-                            <div class="row ">
-                                <span class="mini unrated col-sm-3" ng-if="trail.average === -1">
+                    <div class="listTop10">
+                        <div ng-repeat="trail in top10" class="row trail">
+                            <a class="col-sm-9 col-xs-12 info text-center" ng-href="/#!/user/trail/{{trail._id}}">
+                                <div class="row ">
+                                    <span class="mini unrated col-sm-3" ng-if="trail.average === -1">
                                     Non noté
                                 </span>
-                                <jk-rating-stars ng-if="trail.average !== -1" class="mini stars col-sm-3" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
-                                <div class="col-sm-6">{{trail.commune.name}}</div>
-                                <div class="col-sm-3">{{trail.distance.toFixed(2)}} km</div>
-                            </div>
-                        </a>
+                                    <jk-rating-stars ng-if="trail.average !== -1" class="mini stars col-sm-3" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                                    <div class="col-sm-6">{{trail.commune.name}}</div>
+                                    <div class="col-sm-3">{{trail.distance.toFixed(2)}} km</div>
+                                </div>
+                            </a>
 
-                        <div class="col-sm-3 col-xs-0 preview-container">
-                            <div class="preview ">
-                                <div><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></div>
-                                <div>par {{ trail.author.firstname}} {{ trail.author.lastname}}</div>
+                            <div class="col-sm-3 col-xs-0 preview-container">
+                                <div class="preview ">
+                                    <div><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
