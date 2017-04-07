@@ -4,6 +4,7 @@ import Commune from './commune.js';
 import Note from './note.js';
 import operationOnTrails from '../lib/operation-on-trails.js';
 import imageDownloader from '../lib/download-image.js';
+import round from 'mongo-round';
 
 let commune = new Commune();
 let note = new Note();
@@ -85,15 +86,9 @@ const buildQueryWithFilters = (req) => {
     }, {
         "$addFields": {
             "average": {
-                "$min": [{
                     "$ifNull": [{
-                        "$add": [{
-                            "$floor": {
-                                "$avg": "$notes.note"
-                            }
-                        }, 1]
+                        "$avg": "$notes.note"
                     }, -1]
-                }, 5]
             },
         }
     }, {
@@ -142,7 +137,8 @@ const buildQueryWithFilters = (req) => {
             },
             "commune": {
                 "$arrayElemAt": ["$commune", 0]
-            }
+            },
+            "average": round("$average", 2)
         }
     }, {
         "$project": {
