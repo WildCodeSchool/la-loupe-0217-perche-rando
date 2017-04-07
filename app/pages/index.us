@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <%= pkg.name %>
+        Perche Rando
     </title>
 
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />

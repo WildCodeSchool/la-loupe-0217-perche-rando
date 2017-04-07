@@ -215,9 +215,30 @@ a.ng-binding {
     width: 100%;
     margin-bottom: 10px;
 }
+
 .iconFB {
-width: 100px;
+    width: 75px;
 }
+
+.iconTW {
+    width: 69px;
+    border-radius: 2px;
+}
+
+.btnDelete {
+  width: 65px;
+    height: 26px;
+    padding: 4px;
+    background-color: #e73664;
+    border-bottom-color: #8a0d2d;
+    color: white;
+    margin-left: 362px;
+}
+
+.glyphicon-time {
+  margin-top: 20px;
+}
+
 
 /*Comments*/
 
@@ -371,7 +392,9 @@ width: 100px;
     margin-top: 2px;
     vertical-align: -4px;
 }
-
+.button .material-icons {
+  color: #e73664;
+}
 .noteMoyenne {
     padding-top: 3px;
 }

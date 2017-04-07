@@ -16,14 +16,29 @@
                     </div>
                 </div>
                 <div class="subHeaderColright">
-                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btn-default" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
-                    <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4>
+                    <a href=""
+                    socialshare socialshare-provider="facebook"
+                    socialshare-type='share'
+                    socialshare-title="{{Ville.name}} - {{trail.distance.toFixed(2)}}km"
+                    socialshare-hashtags="Perche, Randonnée"
+                    socialshare-via='598251710373144'
+                    socialshare-description="Découvrez ce circuit avec Peche Rando !"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconFB" src="/partager.png" alt=""></a>
+                    <a href=""
+                    socialshare socialshare-provider="twitter"
+                    socialshare-text="{{Ville.name}} - {{trail.distance.toFixed(2)}}km - Découvrez ce circuit avec Peche Rando !"
+                    socialshare-hashtags="Perche, Randonnée"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconTW" src="/tweet-button.png" alt=""></a>
+                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
+
+                    <h3><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3>
                     Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
-                            Moyenne : <jk-rating-stars ng-if="average !== -1" rating="average" max-rating="5" read-only="true"></jk-rating-stars>
+                    Moyenne : <jk-rating-stars ng-if="average !== -1" rating="average" max-rating="5" read-only="true"></jk-rating-stars>
                             <span class="unrated" ng-if="average === -1">
                                 Non noté
                             </span>
-
                 </div>
             </div>
         </div>
