@@ -5,8 +5,8 @@ var fs = require('fs'),
 const BASE_URL = "https://maps.googleapis.com/maps/api/staticmap";
 const API_KEY = "AIzaSyAJ5qO1thP2uICtSzhHzqJPYA-f-3JgPGM"; // static map api key
 const SETTINGS = {
-    color: '0xe73664',
-    weight: '2',
+    color: '0xe73664ff',
+    weight: '5',
     size: '400x400',
     map_type: 'roadmap'
 };
