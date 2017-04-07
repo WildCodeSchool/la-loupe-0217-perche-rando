@@ -1,16 +1,66 @@
 // Main less file for your application.
 // Use `@import` to use other less files
 // relative to 'app/css' or 'vendor/css'.
-
 @transparent-green: rgba(170, 174, 24, 0.5);
+@green: rgba(170, 174, 24, 1);
 @white: white;
+@orange: #f6a327;
 
 .top-10 {
-    li {
-        background-color: @transparent-green;
-        border-radius: 6px;
-        vertical-align: middle;
-        color: white;
-        font-family: 'Francois One';
+    color: white;
+    font-family: 'Francois One';
+
+    .trail {
+        margin-bottom: 10px;
+
+        .info {
+            background-color: @transparent-green;
+            border-radius: 6px;
+            min-height: 30px;
+            vertical-align: middle;
+            color: white;
+            font-family: 'Francois One';
+
+            &:hover {
+                background-color: @green;
+            }
+        }
+
+        .preview {
+            max-height: 0;
+            position: absolute;
+            z-index: -10;
+            opacity: 0;
+            transition-property: all;
+            transition-duration: 0.5s;
+            transition-timing-function: ease-out;
+        }
+
+        .preview-container {
+            position: relative;
+        }
+
+        &:hover {
+            .preview {
+                max-height: 500px;
+                z-index: 10;
+                opacity: 1;
+                transition-property: all;
+                transition-duration: 0.5s;
+                transition-timing-function: ease-in;
+
+                img {
+                    margin-bottom: 0.6em;
+                }
+            }
+        }
+    }
+}
+
+.unrated {
+    color: @orange;
+
+    &.mini {
+        font-size: 0.75em;
     }
 }

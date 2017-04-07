@@ -233,7 +233,9 @@ a.ng-binding {
     border-bottom-color: #8a0d2d;
     color: white;
 }
-
+.authorTrail {
+  font-size: 0.6em;
+}
 .glyphicon-time {
   margin-top: 20px;
 }
