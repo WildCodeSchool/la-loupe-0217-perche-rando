@@ -101,13 +101,15 @@ const buildQueryWithFilters = (req) => {
                 "average": req.query.sort,
             }
         });
+    } else {
+      query.push({
+        "$sort": {
+          "date" : -1
+        }
+      });
     }
 
-    query.push({
-      "$sort": {
-        "date" : -1
-      }
-    });
+
 
     if (!isNaN(limit) && limit > 0) {
         console.log('limit + skip', limit + skip);
