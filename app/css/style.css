@@ -178,6 +178,12 @@ a.ng-binding {
     color: #f6a327;
     margin-top: 33px;
 }
+.titleMapTrail {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 33px;
+  margin-bottom: -15px;
+}
 
 .subtitleColPages {
     font-family: 'Francois One', sans-serif;

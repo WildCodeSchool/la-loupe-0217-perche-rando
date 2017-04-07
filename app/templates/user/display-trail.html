@@ -4,8 +4,8 @@
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}}<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
-                    <h3 class='subtitletrail'> <img class="iconDistance" src="/distance.png" alt="">  - {{trail.distance.toFixed(2)}}km.&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h3>
+                    <h2 class='titleMapTrail'>{{Ville.name}}<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <h3 class='subtitletrail'> <img class="iconDistance" src="/distance.png" alt="">&nbsp;{{trail.distance.toFixed(2)}}km&nbsp;&nbsp;-&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> Durée estimée : {{time(trail)}}</h3>
                     <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
                 <div>
@@ -16,7 +16,7 @@
                             </shape>
                         </ng-map>
                     </div>
-                </div>it
+                </div>
                 <div class="subHeaderColright">
                     <a href=""
                     socialshare socialshare-provider="facebook"
