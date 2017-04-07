@@ -13,6 +13,7 @@ angular.module('app')
         };
         $scope.rating = 3;
         $scope.user = CurrentUser.user();
+        $scope.trail = {};
 
         TrailService.getOne($scope.idTrail).then(function(res) {
                 $scope.trail = res.data;
@@ -52,8 +53,11 @@ angular.module('app')
         };
 
         $scope.time = function(trail) {
-            time = trail.distance.toFixed(2) / 3;
-            return `${Math.floor(time)} h ${((time % 1) * 60).toFixed(0)} mn`;
+            if (trail.distance !== undefined) {
+                time = trail.distance.toFixed(2) / 3;
+                return `${Math.floor(time)} h ${((time % 1) * 60).toFixed(0)} mn`;
+            }
+            return 0;
         };
 
         $scope.updateRating = function(rating) {
@@ -114,6 +118,9 @@ angular.module('app')
         };
 
         $scope.isAuthor = function() {
-            return $scope.trail.author._id === $scope.user._id;
+            if ($scope.trail.author !== undefined) {
+                return $scope.trail.author._id === $scope.user._id;
+            }
+            return false;
         };
     });
