@@ -215,8 +215,13 @@ a.ng-binding {
     width: 100%;
     margin-bottom: 10px;
 }
+
 .iconFB {
-width: 100px;
+    width: 100px;
+}
+.iconTW {
+  width: 90px;
+border-radius: 2px;
 }
 
 /*Comments*/

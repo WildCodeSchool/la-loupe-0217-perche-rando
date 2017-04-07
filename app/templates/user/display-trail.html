@@ -18,22 +18,26 @@
 
 
                 <div class="subHeaderColright">
-                    <a href="#" socialshare socialshare-provider="facebook"
+                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btn-default" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
+                    <a href=""
+                    socialshare socialshare-provider="facebook"
                     socialshare-type='share'
                     socialshare-title="{{Ville.name}} - {{trail.distance.toFixed(2)}}km"
                     socialshare-hashtags="Perche, Randonnée"
                     socialshare-via='598251710373144'
-                    socialshare-url="http://www.google.com">
-                        <img class="iconFB" src="/partager.png" alt=""></a>
-                    <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4>
-                    <div ng-if="auth.isAuthenticated()">
-                        <p>Votre note :
-                            <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
-                        </p>
-                    </div>
-                    <p>Moyenne :
-                        <jk-rating-stars rating="average" max-rating="5" read-only="true"></jk-rating-stars>
-                    </p>
+                    socialshare-description="Découvrez ce circuit avec Peche Rando !"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconFB" src="/partager.png" alt=""></a>
+                    <a href=""
+                    socialshare socialshare-provider="twitter"
+                    socialshare-text="{{Ville.name}} - {{trail.distance.toFixed(2)}}km - Découvrez ce circuit avec Peche Rando !"
+                    socialshare-hashtags="Perche, Randonnée"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconTW" src="/tweet-button.png" alt=""></a></a>
+                    <h4><span class="glyphicon glyphicon-time"></span> Durée moyenne : {{time(trail)}}</h4> Votre note :
+                    <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars>
+                    Moyenne :
+                    <jk-rating-stars rating="average" max-rating="5" read-only="true"></jk-rating-stars>
                 </div>
             </div>
         </div>
