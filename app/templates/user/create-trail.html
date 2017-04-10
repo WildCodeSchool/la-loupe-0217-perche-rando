@@ -1,15 +1,15 @@
 <div class="container-fluid fond">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>Créez votre circuit de randonnée !</h2>
+                    <h2 class='titleColPages'>Tracez votre circuit de randonnée !</h2>
                 </div>
 
                 <div>
                     <div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
-                        <ng-map id='createmap' center='[48.4713, 1.0143]' zoom='13' style="height: 80%; width: 50%">
+                        <ng-map id='createmap' center='[48.4713, 1.0143]' zoom='13' style="height: 500px; width: 100%">
                             <drawing-manager drawing-control-options="{position: 'TOP_CENTER',drawingModes:['polyline']}" drawingControl="true" drawingMode="POLYLINE" polylineOptions="{strokeColor: '#e73664',fillOpacity: 1,strokeWeight: 3,clickable: false,zIndex: 1,editable: true}"
                                 on-polylinecomplete="setPath()">
                             </drawing-manager>
@@ -17,14 +17,23 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <form ng-submit="createTrail()">
-                    <input required ng-model="commune" placeholder="Commune de départ" />
-                    <button ng-disabled="!(trail.nodes.length > 0)" type="submit">Créer Circuit</button>
-                </form>
-            </div>
-            <div ng-if="trailCreated._id !== undefined" class='blocColRight'>
-                <a ng-href="/#!/trail/{{trailCreated._id}}" class="btn btn-info" role="button">Cliquez ici pour acceder à votre circuit</a>
+
+        </div>
+        <div class="col-md-5 coldroite">
+            <div class='blocColRight'>
+                <div>
+                    <h2 class='titleColright'>Enregistrez les informations</h2>
+                    <h4 class="subHeaderColright">à {{Ville.name}}</h4>
+                </div>
+                <div>
+                    <form ng-submit="createTrail()">
+                        <input required ng-model="commune" placeholder="Commune de départ" />
+                        <button class="postComment btn btn-xs" ng-disabled="!(trail.nodes.length > 0)" type="submit">Créer Circuit</button>
+                    </form>
+                </div>
+                <div ng-if="trailCreated._id !== undefined" class='blocColRight'>
+                    <a ng-href="/#!/user/trail/{{trailCreated._id}}" class="postComment btn btn-xs" role="button">Cliquez ici pour acceder à votre circuit</a>
+                </div>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
  * Correspond à la création d'un circuit
  */
 angular.module('app')
-    .controller('CreateTrailController', function($scope, $stateParams, TrailService, NgMap) {
+    .controller('CreateTrailController', function($scope, $stateParams, CurrentUser, TrailService, NgMap) {
         $scope.error = {
             'content': '',
             'show': false
@@ -27,6 +27,7 @@ angular.module('app')
 
         $scope.createTrail = function() {
             $scope.trail.commune = $scope.commune;
+            $scope.trail.author = CurrentUser.user()._id;
             // TODO check that the trail has been created
             TrailService.create($scope.trail).then(function(res) {
                 console.log("Trail créée", res);

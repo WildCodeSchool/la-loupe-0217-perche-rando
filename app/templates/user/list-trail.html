@@ -1,32 +1,107 @@
+<div class="container-fluid fond">
+    <div ng-if="showMessage" class="alert alert-success">
+        {{message}}
+    </div>
 
-<form class="form-inline" ng-submit="applyFilters()">
-<select ng-model="filterDistance" name="distance" class="form-control" >
-<option disabled selected value="">Distance</option>
-<option value="[0,5]">de 0 à 5 km</option>
-<option value="[6,10]">de 6 à 10 km</option>
-<option value="[11,20]">de 11 à 20 km</option>
-<option value="[21,30]">de 21 à 30 km</option>
-<option value="[31,40]">de 31 à 40 km</option>
-<option value="[41]">Plus de 41 km</option>
-</select>
+    <div class="row">
+        <div class="col-md-7">
+            <div>
+                <h2 class='titleColPages'>Choisissez un circuit</h2>
+            </div>
+            <div class="blocMap">
+                <form class="form-inline tabList" ng-submit="goToPage(0)">
+                    <select ng-change="goToPage(0)" ng-model="filters.distance" name="distance" class="form-control">
+                      <option selected value="">Toutes les distances</option>
+                      <option value="[0,5]">de 0 à 5 km</option>
+                      <option value="[6,10]">de 6 à 10 km</option>
+                      <option value="[11,20]">de 11 à 20 km</option>
+                      <option value="[21,30]">de 21 à 30 km</option>
+                      <option value="[31,40]">de 31 à 40 km</option>
+                      <option value="[41, 9999]">Plus de 41 km</option>
+                    </select>
 
-<select ng-options="City.id as City.commune for City in Cities | orderBy:'commune'" ng-model="filterCity" name="Commune" class="form-control" >
-<option disabled selected value="">Commune</option>
-</select>
+                    <select ng-change="goToPage(0)" ng-options="city._id as city.name for city in cities | orderBy:'commune'" ng-model="filters.commune" name="Commune" class="form-control">
+                        <option selected value="">Toutes les communes</option>
+                    </select>
 
-<select ng-model="filterRating" name="distance" class="form-control" >
-<option disabled selected value="">Note</option>
-<option value="[1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
-<option value="[2]">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
-<option value="[3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
-<option value="[4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
-<option value="[5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-</select>
+                    <select ng-change="goToPage(0)" ng-model="filters.note" name="note" class="form-control">
+                        <option selected value="">Toutes les notes</option>
+                        <option value="[-2, -1]">Sans note</option>
+                        <option value="[-1, 1]">&#9733; &#9734; &#9734; &#9734; &#9734;</option>
+                        <option value="[1, 2]">&#9733; &#9733; &#9734; &#9734; &#9734;</option>
+                        <option value="[2, 3]">&#9733; &#9733; &#9733; &#9734; &#9734;</option>
+                        <option value="[3, 4]">&#9733; &#9733; &#9733; &#9733; &#9734;</option>
+                        <option value="[4, 5]">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+                    </select>
+                </form>
 
-<button type='submit'>Chercher</button>
-</form>
+                <div ng-repeat='trail in trails | orderBy : $index'>
+                    <div class="listTrail">
+                        <a ng-href="/#!/user/trail/{{trail._id}}"><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></a>
+                        <a ng-href="/#!/user/trail/{{trail._id}}"><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
+                        <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
+                        <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
+                            <span class="unrated" ng-if="trail.average === -1">
+                                Non noté
+                            </span>
+                            <jk-rating-stars ng-if="trail.average !== -1" class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                        </p>
+                    </div>
+                </div>
+                <ul class="pagination pagination-lg">
+                    <li ng-repeat="page in pages"><button ng-click="goToPage(page)">{{ page + 1 }}</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-5 coldroite">
+            <div class="row blocColRight">
+                <div class="col-xs-12">
+                    <div class="formWeather">
+                        <h2 class='titleColright'>Vérifiez la météo</h2>
+                    </div>
+                    <div class="">
+                        <form class="inputCityWeather" ng-submit="consultWeather()">
+                            <input required ng-model="cityWeather" placeholder="Saisissez le nom de la ville" />
+                            <button type="submit" class="btnCityWeather postComment btn  btn-xs">Afficher</button>
+                        </form>
+                    </div>
+                    <div ng-repeat='meteo in weather' class='weatherList'>
+                        <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
+                        <p class="temp">{{meteo.main.temp}}°C</p>
+                        <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
+                        <p class="meteoDescription">{{meteo.weather[0].description}}</p>
+                        <p class="wind"> <img class="iconWind" src="/wind2.png" alt=""> {{meteo.wind.speed}} km/h</p>
+                    </div>
+                </div>
+            </div>
 
-<div ng-repeat='list in filters' class="">
+            <div class="row blocColRight top-10">
+                <div class="col-xs-12">
+                    <div>
+                        <h2 class='titleColright'>Top 10 des meilleurs circuits</h2>
+                    </div>
+                    <div class="listTop10">
+                        <div ng-repeat="trail in top10" class="row trail">
+                            <a class="col-sm-9 col-xs-12 info text-center" ng-href="/#!/user/trail/{{trail._id}}">
+                                <div class="row ">
+                                    <span class="mini unrated col-sm-3" ng-if="trail.average === -1">
+                                    Non noté
+                                </span>
+                                    <jk-rating-stars ng-if="trail.average !== -1" class="mini stars col-sm-3" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                                    <div class="col-sm-6">{{trail.commune.name}}</div>
+                                    <div class="col-sm-3">{{trail.distance.toFixed(2)}} km</div>
+                                </div>
+                            </a>
 
-
+                            <div class="col-sm-3 col-xs-0 preview-container">
+                                <div class="preview ">
+                                    <div><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt="Circuit-{{trail.distance}}-{{trail.commune.name}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

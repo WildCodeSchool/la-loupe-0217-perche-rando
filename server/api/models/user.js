@@ -9,6 +9,14 @@ const hashCode = (s) => s.split("").reduce((a, b) => {
 }, 0);
 
 const userSchema = new mongoose.Schema({
+    firstname: {
+        type: String,
+        required: true
+    },
+    lastname: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: [true, 'Email address is required'],
@@ -125,8 +133,13 @@ export default class User {
     }
 
     update(req, res) {
+      if (req.body.password) {
+          var salt = bcrypt.genSaltSync(10);
+          req.body.password = bcrypt.hashSync(req.body.password, salt);
+      }
         model.update({
-            _id: req.params.id
+            _id: req.params.id,
+
         }, req.body, (err, user) => {
             if (err || !user) {
                 res.status(500).send(err.message);

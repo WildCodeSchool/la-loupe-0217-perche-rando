@@ -4,18 +4,35 @@ import Auth from '../middlewares/authorization.js';
 
 let router = express.Router();
 
-// TODO add authorization so that only loggedin users can access the trails
 module.exports = (app) => {
 
     var trail = new Trail();
 
-    // TODO make it possible to filter some of the trails with paramters (commune, notation ...)
-    router.get('/', trail.findAll);
+    router.get('/', Auth.hasAuthorization, trail.findAll);
 
-    router.get('/:id', trail.findById);
+    router.get('/top10', Auth.hasAuthorization, trail.top10.bind(trail));
 
-    router.post('/', trail.create);
+    router.get('/count/:trailsPerPages', Auth.hasAuthorization, trail.count);
 
-    // TODO add delete route and eventually an update one
+    router.get('/58e60dc6c91e932518c471c1', (req, res) => {
+        req.params.id = '58e60dc6c91e932518c471c1';
+        return trail.findById(req, res);
+    });
+
+    router.get('/58e64f05f528fc520c7241dd', (req, res) => {
+        req.params.id = '58e64f05f528fc520c7241dd';
+        return trail.findById(req, res);
+    });
+    router.get('/58e6506630118755318e4941', (req, res) => {
+        req.params.id = '58e6506630118755318e4941';
+        return trail.findById(req, res);
+    });
+
+    router.get('/:id', Auth.hasAuthorization, trail.findById);
+
+    router.post('/', Auth.hasAuthorization, trail.create);
+
+    router.delete('/:id', Auth.hasAuthorization, Auth.isAuthor, trail.delete);
+
     app.use('/trails', router);
 };

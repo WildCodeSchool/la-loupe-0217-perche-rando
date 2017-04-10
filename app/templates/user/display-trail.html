@@ -1,24 +1,45 @@
 <div class="container-fluid fond">
-    <!-- <div class="container home">
-        <h1>Perche Rando</h1>
-        <p>Plongez en pleine nature...</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Sign up &raquo;</a></p>
-    </div> -->
 
-    <div="row">
+    <div class="row">
         <div class="col-md-7">
             <div class="blocMap">
                 <div>
-                    <h2 class='titleColPages'>{{Ville.name}} - {{trail.distance.toFixed(2)}}km</h2>
+                    <h2 class='titleMapTrail'>{{Ville.name}}<span class="authorTrail">&nbsp;&nbsp;Par&nbsp;{{ trail.author.firstname }}&nbsp;{{ trail.author.lastname }}</span></h2>
+                    <h3 class='subtitletrail'> <img class="iconDistance" src="/distance.png" alt="">&nbsp;{{trail.distance.toFixed(2)}}&nbsp;km&nbsp;&nbsp;-&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> Durée estimée : {{time(trail)}}</h3>
+                    <button ng-if="auth.isAuthenticated() && isAuthor()" type="button" class="btn btnDelete" ng-click="deleteTrail(trail._id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
                 <div>
                     <!-- TODO faire en sorte que {{toGmapsCoordinates(trail.nodes)}} ne se fasse que quand le trail est chargé -->
                     <div class="map" map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyCSvjGoZxXRQtxtGbsjlA8zV5vsp_kCFQY&libraries=drawing">
-                        <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 25em; width: 98%">
+                        <ng-map id='createmap' center='[0, 0.83037]' zoom='5' style="height: 35em; width: 98%">
                             <shape name="polyline" id="foo" path="{{toGmapsCoordinates(trail.nodes)}}" stroke-color="#FF0000" stroke-opacity="1.0" stroke-weight="3">
                             </shape>
                         </ng-map>
                     </div>
+                </div>
+                <div class="subHeaderColright">
+                    <a href=""
+                    socialshare socialshare-provider="facebook"
+                    socialshare-type='share'
+                    socialshare-title="{{Ville.name}} - {{trail.distance.toFixed(2)}}km"
+                    socialshare-hashtags="Perche, Randonnée"
+                    socialshare-via='598251710373144'
+                    socialshare-description="Découvrez ce circuit avec Peche Rando !"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconFB" src="/partager.png" alt=""></a>
+                    <a href=""
+                    socialshare socialshare-provider="twitter"
+                    socialshare-text="{{Ville.name}} - {{trail.distance.toFixed(2)}}km - Découvrez ce circuit avec Peche Rando !"
+                    socialshare-hashtags="Perche, Randonnée"
+                    socialshare-url="http://www.percherando.com">
+                    <img class="iconTW" src="/tweet-button.png" alt=""></a>
+
+
+                    <p ng-show="auth.isAuthenticated()">Votre note : <jk-rating-stars rating="rating" max-rating="5" on-rating="updateRating(rating)"></jk-rating-stars></p>
+                    Moyenne : <jk-rating-stars ng-if="average !== -1" rating="average" max-rating="5" read-only="true"></jk-rating-stars>
+                            <span class="unrated" ng-if="average === -1">
+                                Non noté
+                            </span>
                 </div>
             </div>
         </div>
@@ -32,7 +53,7 @@
                 <div class="row">
 
                     <div class="col-xs-12">
-                        <div ng-repeat='meteo in weather' ng-if="$index % 8 == 0" class='weather'>
+                        <div ng-repeat='meteo in weather' class='weather'>
                             <p class="date">Le {{changeDate(meteo.dt_txt)}}</p>
                             <p class="temp">{{meteo.main.temp}}°C</p>
                             <img ng-src='http://openweathermap.org/img/w/{{meteo.weather[0].icon}}.png' alt="">
@@ -45,18 +66,19 @@
             <div class="blocColRight">
                 <h2 class='titleColright'>Commentaires</h2>
                 <div class="commentObject" ng-repeat="comment in commentsList | orderBy: '-_id'">
-                    <p class="subHeaderColright">De {{comment.author._id}}</p>
+                    <p class="subHeaderColright"><img class="imgGravatarComment" src="http://www.gravatar.com/avatar/{{ comment.author.email | gravatar }}?d=identicon">De {{comment.author.firstname}} {{comment.author.lastname}}</p>
                     <p class="commentDate">le {{comment.date | date : 'medium'}}</p>
                     <p class="commentContent">{{comment.content}}</p>
                 </div>
 
-                <div class="">
+                <div ng-show="auth.isAuthenticated()">
                     <p class="subHeaderColright">Ajouter un commentaire</p>
-                    <form class="" ng-submit="addComment()">
+                    <form ng-submit="addComment()" >
                         <textarea class="form-control " rows="3" ng-model="newComment.content"></textarea>
                         <button type="submit" class="postComment btn  btn-xs">Envoyer</button>
                     </form>
                 </div>
             </div>
         </div>
+      </div>
 </div>

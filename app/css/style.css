@@ -8,13 +8,48 @@
     src: url('../fonts/Salsa-Regular.ttf');
 }
 
+
+/*navbar*/
+
+.navbar li {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+}
+
+.nav {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+}
+
+.imgNavbarGravatar {
+    width: 25px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-right: 5px;
+}
+
+.navbar-inverse .navbar-nav>.active>a {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #f6a327;
+}
+
+a.ng-binding {
+    height: 64px;
+    margin: -13px;
+}
+
+
 /*Home*/
 
 .couv {
-    background-image: url("../img/couv3.jpg");
+    background-image: url("../img/couv4.jpg");
     background-position: bottom;
     background-size: cover;
-    height: 450px;
+    height: 470px;
     margin-top: -23px;
 }
 
@@ -25,18 +60,21 @@
 
 .home h1 {
     font-size: 8em;
+    margin-left: 25px;
+    margin-top: 25px;
 }
 
 .home p {
     font-size: 2.3em;
     margin-bottom: 2em;
+    margin-left: 30px;
 }
 
 .home .btn {
     padding: 6px;
     background-color: #aaae18;
     border-color: #aaae18;
-    font-style: 'Salsa-Regular';
+    font-style: 'Francois One';
 }
 
 .home .btn:active {
@@ -44,11 +82,28 @@
     border-color: #f6a327;
 }
 
+
+/*Login*/
+
+.formLogin {
+    margin-top: 200px;
+}
+
+.btnLogin {
+    background-color: #aaae18;
+    border-color: #6B6E11;
+}
+
+.form-control:focus {
+    border-color: #aaae18;
+}
+
+
 /*météo*/
 
 .weather {
     float: left;
-    height: 175px;
+    height: 180px;
     font-size: 0.8em;
     border: solid;
     border-radius: 6px;
@@ -57,9 +112,29 @@
     padding: 2px;
     text-align: center;
     margin-left: 2px;
-    font-family: 'Salsa-Regular';
-    color: white;
     margin-right: 6px;
+    font-family: 'Francois One';
+    color: white;
+    width: 18%;
+    background-color: rgba(170, 174, 24, 0.5);
+    position: relative;
+}
+
+.weatherList {
+    float: left;
+    height: 180px;
+    font-size: 0.8em;
+    border: solid;
+    border-radius: 6px;
+    border-width: 0.1em;
+    border-color: #6B6E11;
+    padding: 2px;
+    text-align: center;
+    margin-left: 2px;
+    margin-top: 10px;
+    margin-right: 6px;
+    font-family: 'Francois One';
+    color: white;
     width: 18%;
     background-color: rgba(170, 174, 24, 0.5);
     position: relative;
@@ -83,7 +158,6 @@
 /*Pages*/
 
 .blocMap {
-
     margin-top: 20px;
     margin-right: 10%;
     padding-left: 10px;
@@ -104,12 +178,35 @@
     color: #f6a327;
     margin-top: 33px;
 }
+.titleMapTrail {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 33px;
+  margin-bottom: -5px;
+}
+
+.subtitleColPages {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 33px;
+}
+.subtitletrail {
+  font-family: 'Francois One', sans-serif;
+  color: #f6a327;
+  margin-top: 10px;
+}
 
 .titleColright {
     font-family: 'Francois One', sans-serif;
     color: #f6a327;
     margin-top: 10px;
     margin-bottom: 2px;
+}
+
+.authorDisplay {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    font-size: 0.5em;
 }
 
 .subHeaderColright {
@@ -122,17 +219,14 @@
     background-image: url("../img/couv3.jpg");
     background-position: bottom;
     background-size: cover;
-    min-height: 600px;
+    min-height: 800px;
     margin-top: -27px;
     border-radius: 6px;
 }
 
-#titleNavbar {
-    font-family: 'Francois One', sans-serif;
-}
-
-.navbar-inverse .navbar-nav>li>a {
-    color: #f6a327;
+.iconDistance {
+    width: 6%;
+    vertical-align: 0px;
 }
 
 .map {
@@ -141,6 +235,37 @@
 
 .imgTrailHome {
     width: 100%;
+    margin-bottom: 10px;
+}
+
+.iconFB {
+    width: 75px;
+}
+
+.iconTW {
+    width: 69px;
+    border-radius: 2px;
+}
+
+.btnDelete {
+    width: 65px;
+    height: 26px;
+    padding: 4px;
+    background-color: #e73664;
+    border-bottom-color: #8a0d2d;
+    color: white;
+}
+
+.authorTrail {
+    font-size: 0.6em;
+}
+
+.glyphicon-time {
+    margin-top: 20px;
+}
+
+.authorTrail {
+    font-size: 0.5em;
 }
 
 
@@ -155,42 +280,198 @@
 }
 
 .commentDate {
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     font-size: 1em;
     margin-top: -3%;
     color: #f6a327;
 }
+
 .commentContent {
-  font-size: 1em;
-  border: solid;
-  border-radius: 6px;
-  border-width: 0.1em;
-  border-color: #6B6E11;
-  padding: 2%;
-  margin-left: 2px;
-  font-family: 'Salsa-Regular';
-  color: white;
-  margin-right: 6px;
-  width: 100%;
-  background-color: rgba(170, 174, 24, 0.5);
-  position: relative;
+    font-size: 1em;
+    border: solid;
+    border-radius: 6px;
+    border-width: 0.1em;
+    border-color: #6B6E11;
+    padding: 2%;
+    margin-left: 2px;
+    font-family: 'Francois One';
+    color: white;
+    margin-right: 6px;
+    width: 100%;
+    background-color: rgba(170, 174, 24, 0.5);
+    position: relative;
+}
+
+.imgGravatarComment {
+    width: 5%;
+    margin-bottom: 1%;
+    margin-right: 1%;
 }
 
 .postComment {
-margin-top: 2%;
+    margin-top: 2%;
 }
+
 .postComment {
-  padding: 6px;
+    padding: 6px;
     background-color: #aaae18;
     border-color: #aaae18;
-    font-family: 'Salsa-Regular';
+    font-family: 'Francois One';
     font-size: 1em;
     color: #f6a327;
+    text-shadow: 0.1em 0.1em 0px #6B6E11;
 }
 
+
+/*profil*/
+
+.subHeaderProfile {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 35px;
+}
+
+.subHeaderUpdateProfile {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 15px;
+}
+
+.titleProfile {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 0px;
+}
+
+.inputProfile {
+    margin-left: 20px;
+}
+
+.tableProfile td {
+    padding: 10px;
+}
+
+.formProfile {
+    margin-bottom: 10px;
+}
+
+.imgGravatar {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+
+/*List Trail*/
+
+.imgTrail {
+    float: left;
+    width: 75px;
+    border-radius: 6px;
+    margin-right: 10px;
+}
+
+.tabList {
+    margin-bottom: 20px;
+}
+
+.listTrail {
+    width: 90%;
+    height: 88px;
+    background-color: rgba(170, 174, 24, 0.5);
+    border: solid;
+    border-color: #6B6E11;
+    border-width: 1px;
+    border-radius: 6px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.imgGravatarlist {
+    width: 16px;
+    margin-bottom: 1%;
+    margin-right: 1%;
+}
+
+.dateTrailList {
+    font-family: 'Francois One';
+    color: white;
+    font-size: 1em;
+    margin-bottom: 13px;
+    margin-top: -10px;
+}
+
+.formWeather {
+    margin-bottom: 10px;
+}
+
+.btnCityWeather {
+    margin-top: -3px;
+}
+
+.stars .material-icons {
+    font-size: 17px !important;
+}
+
+.stars.mini .material-icons {
+    font-size: 9px !important;
+}
+
+.stars {
+    display: inline-block;
+    margin-top: 2px;
+    vertical-align: -4px;
+}
+
+.button .material-icons {
+    color: #e73664;
+}
+
+.noteMoyenne {
+    padding-top: 3px;
+}
+
+.starslList {
+    font-family: 'Francois One';
+    color: white;
+    font-size: 1em;
+    margin-bottom: 13px;
+    margin-top: -10px;
+}
+
+.HeaderList {
+    font-family: 'Francois One', sans-serif;
+    color: #f6a327;
+    margin-top: 2px;
+    margin-bottom: 15px;
+}
+
+.listTop10 {
+    margin-top: 10px;
+}
+
+
 /* TODO à améliorer */
+
 button:disabled {
     background-color: lightgrey;
     color: black;
     opacity: .75;
+}
+
+@media only screen and (max-width: 650px) {
+    .HeaderList {
+        font-size: 1.1em;
+    }
+    .stars .material-icons {
+        font-size: 17px !important;
+    }
+    .stars {
+        vertical-align: -2px;
+    }
+    .imgTrail {
+        width: 78px;
+    }
+    .listTrail {
+        height: 90px;
+    }
 }

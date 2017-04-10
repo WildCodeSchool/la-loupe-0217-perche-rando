@@ -3,10 +3,12 @@
 
 <head>
     <title>
-        <%= pkg.name %>
+        Perche Rando
     </title>
 
     <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 </head>
 
 <body>
@@ -19,7 +21,7 @@
 <hr>
 
 <footer>
-    <p>&copy; 2017 Wild Code School, Martin Allard - Thierry Même - Valentin Rigaud.</p>
+    <p>Projet de Martin Allard - Thierry Même - Valentin Rigaud - Wild Code School 2017</p>
 </footer>
 
 </html>

@@ -1,1 +1,49 @@
-Profile de {{user.email}}
+<div class="container-fluid fond">
+    <div class="row">
+
+
+        <div class="col-md-5 col-md-push-7 coldroite">
+            <div class="blocColRight">
+
+                <h1 class="titleColright">{{user.firstname}} {{user.lastname}}</h1>
+                <img class="imgGravatar" src="http://www.gravatar.com/avatar/{{ user.email | gravatar }}?d=identicon">
+
+                <form class="form" name="loginForm" ng-submit="updateProfile()">
+                    <div ng-repeat="error in errors">{{error.error}}</div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Firstname</label>
+                        <input id="firstname" type="text" class="form-control" ng-model="newuser.firstname" required placeholder="Firstname">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Lastname</label>
+                        <input id="lastname" type="text" class="form-control" ng-model="newuser.lastname" required placeholder="">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Email</label>
+                        <input id="email" type="email" class="form-control" ng-model="newuser.email" required placeholder="">
+                    </div>
+                    <div class="input-group formProfile">
+                        <label class="subHeaderUpdateProfile" for="">Password</label>
+                        <input id="password" type="password" class="form-control" ng-model="newuser.password" required placeholder="">
+                    </div>
+                    <button type="submit" class="postComment btn  btn-xs">Mettre à jour</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-7 col-md-pull-5">
+            <div>
+                <h2 class='titleColPages'>Vos circuits</h2>
+            </div>
+            <div ng-repeat='trail in trails'>
+                <div class="listTrail">
+                    <a ng-href="/#!/user/trail/{{trail._id}}"><img class="imgTrail" ng-src="/img/trail-{{trail._id}}.png" alt=""></a>
+                    <a ng-href="/#!/user/trail/{{trail._id}}"><h4 class="HeaderList">{{trail.commune.name}} - {{trail.distance.toFixed(2)}} km</h4></a>
+                    <h5 class="dateTrailList"><img class="imgGravatarlist" src="http://www.gravatar.com/avatar/{{ trail.author.email | gravatar }}?d=identicon">Circuit créé le {{trail.date | date : shortDate}} par&nbsp;{{ trail.author.firstname}}&nbsp;{{ trail.author.lastname }}</h5>
+                    <p class="starslList"> <span class="noteMoyenne">Note moyenne : </span>
+                        <jk-rating-stars class="stars" rating="trail.average" max-rating="5" read-only="true"></jk-rating-stars>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
