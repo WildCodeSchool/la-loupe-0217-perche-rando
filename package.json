@@ -16,5 +16,9 @@
     "lineman-angular": "^0.3.0",
     "lineman-less": "^0.1.0",
     "ngmap": "^1.18.4"
+  },
+  "devDependencies": {
+    "mocha": "^3.4.2",
+    "supertest": "^3.0.0"
   }
 }
